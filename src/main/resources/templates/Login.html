@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<link th:href="@{/css/loginPage.css}" rel="stylesheet" />
+
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
+<!--     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"> -->
+<title>Login</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous" />
+	 <script th:src="@{/js/captcha.js}"></script>
+</head>
+<body>
+
+	<!-- <header id="header"  th:include="common/header" ></header> -->
+	<div id="pagecss">
+		<div class=" container-fluidtext-center">
+			<div>
+				<img class="img-fluid" th:src="@{/image/logo.png}" />
+				<!--         th:src="/@{/image/logo.png}" -->
+			</div>
+			 <div th:if="${param.error}" style="color: red;">       
+			   Invalid username or password.     </div>
+			
+			<div class="card-header text-white bg-primary text-center"><h5>Welcome to Login Page</h5></div>
+			<form method="post" style="max-width: 350px; margin: 0 auto;" th:Object="${userObj}"
+                th:action="@{/login}" onsubmit="return validateForm()">
+
+				<div class="border border-secondary p-3 rounded">
+					<input type="hidden" name="authToken" value="${authToken}" />
+					<c:if test="${ !empty message}">
+						<font color="Red" th:text="${message}"></font>
+						</span>
+					</c:if>
+					<p>
+						<input type="text" th:field="*{username}" class="form-control"
+							placeholder="Employee ID" required />
+					</p>
+					<p>
+						<input type="password" th:field="*{password}" class="form-control"
+							placeholder="password" required />
+					</p>
+					<p>
+						<img th:src="*{'data:image/png;base64,'+ image}" />
+					</p>
+					<p>
+						<input type="text" th:field="*{captcha}" class="form-control" placeholder="captcha" id="captcha"/>
+						<input type="hidden" th:field="*{hidden}" id="hiddenCaptcha"/>
+						
+					</p>
+
+					<p>
+						<input type="submit" value="Login" class="btn btn-primary" />
+					</p>
+				</div>
+
+			</form>
+			<p>
+				<a th:href="@{/forgot-password}">Forgot Password?</a>
+			</p>
+			<p>
+				<a th:href="@{/register}">Register</a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+
+function validateForm() {
+    var enteredCaptcha = document.getElementById('captcha').value;
+    var hiddenCaptcha = document.getElementById('hiddenCaptcha').value;
+
+    if (enteredCaptcha !== hiddenCaptcha) {
+        alert('Captcha is invalid. Please try again.');
+        return false;
+    }
+
+    return true;
+}
+
+</script>

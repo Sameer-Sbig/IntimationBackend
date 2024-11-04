@@ -1,0 +1,22 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: montserrat;
+	background: linear-gradient(120deg, #2980b9, #8e44ad);
+	height: 100vh;
+	overflow: hidden;
+}
+
+#pagecss {
+/* 	margin-top: 25vh; */
+/* 	display: flex; */
+/* 	align-items: center; */
+/* 	justify-content: center; */
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:400px;
+background:white;
+border-radius:10px;
+}

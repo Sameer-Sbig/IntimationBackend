@@ -1,0 +1,101 @@
+th {
+	background: #4e73df;
+	color: #ffffffff;
+	border-radius: 0px;
+}
+
+#body-flex {
+	width: 100%;
+	display: flex;
+}
+
+#btn {
+	margin-top: 2rem;
+}
+
+#gpaTableData {
+	margin-left: 2rem;
+}
+
+#paiTable {
+	margin-left: 2rem;
+	top: 0;
+	left: 3%;
+	width: 90%;
+	text-align: center;
+	margin-bottom: 7%;
+}
+
+table, td {
+	/*border: 1px solid black;*/
+	border: none;
+	padding: none;
+}
+
+/* #paiTableData { */
+/* 	/*overflow: hidden; */
+/*   border: none; */
+/*   background-color: purple;*/ */
+	
+/* } */
+
+#owner_account_number {
+	padding: 0.7rem 1.5rem;
+	border: 1px solid #4361ee;
+	background-color: #4361ee;
+	color: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#applicant_name {
+	padding: 0.7rem 1.5rem;
+	border: 1px solid #4361ee;
+	background-color: #4361ee;
+	color: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.tab {
+	overflow: hidden;
+	border: none;
+	background-color: pink;
+}
+
+.tabcontent {
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
+}
+
+.tablinks {
+	padding: 0.7rem 1.5rem;
+	border: 1px solid #4361ee;
+	background-color: #4361ee;
+	color: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#whole {
+	margin-bottom: 27%;
+	margin-left: 3%;
+}
+
+/* #dashboardTabs { */
+/* 	position: fixed; */
+/* 	top: 5vh; */
+/* 	left: 4vw; */
+/* 	width: 90%; */
+/* 	height: 90vh; */
+/* 	margin: 5vh auto; */
+/* 	padding: 1%; */
+/* 	box-shadow: 0vh 0vw 1vw 0vw #4e73df; */
+/* 	border-radius: 2vw; */
+/* } */
+
+.form-group {
+	color: #4361ee;
+}

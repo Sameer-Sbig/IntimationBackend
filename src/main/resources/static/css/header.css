@@ -1,0 +1,32 @@
+#logo {
+	height: 10vh;
+	margin-left: 1.5vh;
+	margin-right: 1.5vh;
+}
+
+#ham, #profile-pic {
+	height: 4vh;
+	width: 4vh;
+	margin-top: 0.5vh;
+	margin-left: 1.5vh;
+	margin-right: 1.5vh;
+	margin-bottom: 1.5vh;
+}
+
+#profile {
+	display: flex;
+	float: right;
+}
+
+#profile-content {
+	height: 7vh;
+	margin-top: 1.5vh;
+	margin-left: 1.5vh;
+	margin-right: 1.5vh;
+	margin-bottom: 1.5vh;
+	background-image: url("");
+}
+
+#profile-pic {
+	border-radius: 50%;
+}

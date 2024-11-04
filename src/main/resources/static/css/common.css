@@ -1,0 +1,175 @@
+ 
+  
+  /* Keyframes for the loading animation */
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Styling for the loading indicator container */
+    #loadingIndicator {
+        display: none;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Styling for the loading animation */
+    .loading-spinner {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border: 5px solid transparent;
+        border-top: 8px solid purple; /* Customize the border color */
+        border-radius: 60%;
+        animation: rotate 1s linear infinite;
+        vertical-align: middle;
+    }
+
+    /* Styling for the static loading text */
+    .loading-text {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+#filtertable th {
+	background-color: purple;
+	border-radius: 50vw;
+	color: #852677;
+	border: solid 1px #852677;
+
+	/* 	background: -webkit-linear-gradient(#852677, #4e73df); */
+	/* 	-webkit-background-clip: text; */
+	/* 	-webkit-text-fill-color: transparent; */
+}
+
+.hidden {
+	display: none;
+}
+
+.rsm_policy_det_title_head {
+	font-size: 10pt;
+	background-color: white;
+	color: skyblue;
+	position: relative;
+	top: 5px;
+	left: 2px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.rms_policy_det_header_head {
+	border: 1px solid skyblue;
+	padding: 2px;
+	overflow: auto;
+}
+
+.rms_policy_det_header {
+	padding: 10px;
+	overflow: auto;
+}
+
+.rsm_policy_det_title {
+	font-size: 10pt;
+	background-color: white;
+	color: black;
+	position: relative;
+	top: 10px;
+	left: 2px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.required {
+	color: red;
+}
+
+#searchBtn {
+	background-color: purple;
+	color: white;
+	width: 120px;
+	margin-left: 12px;
+	margin-right: 1px;
+	margin-top: 3px;
+	cursor: pointer;
+	font-weigth: bold;
+	font-style: strong;
+	font-size: 16px;
+	height: 40px;
+}
+
+#exportBtn {
+	background-color: purple;
+	color: white;
+	width: 120px;
+	margin-left: 0px;
+	margin-right: 1px;
+	margin-top: 3px;
+	cursor: pointer;
+	font-weigth: bold;
+	font-style: strong;
+	font-size: 16px;
+	height: 40px;
+}
+
+#downloadBtn {
+	background-color: purple;
+	color: white;
+	width: 120px;
+	margin-left: 0px;
+	margin-right: 1px;
+	margin-top: 3px;
+	font-weigth: bold;
+	cursor: pointer;
+	font-style: strong;
+	font-size: 16px;
+	height: 40px;
+}
+
+#downloadAllBtn {
+	background-color: purple;
+	color: white;
+	width: 120px;
+	margin-left: 0px;
+	margin-right: 1px;
+	font-weigth: bold;
+	margin-top: 3px;
+	cursor: pointer;
+	font-style: strong;
+	font-size: 16px;
+	height: 40px;
+}
+.required {
+	color: red;
+}
+.tableColor{
+	background-color:purple;
+	color:white
+}
+
+.tableColor th {
+		background-color:purple;
+}
+#close-button {
+	position: fixed;
+	position: fixed;
+	border: none;
+	color: red;
+	background-color: #ffffff00;
+}
+#PopUp {
+	position: fixed;
+	margin: 5vh auto;
+	overflow: auto;
+	border-style: solid;
+	border: 5px solid black;
+	border-radius: 25px;
+}
+#PopUpblur {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	backdrop-filter: blur(8px);
+}

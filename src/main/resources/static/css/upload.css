@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+.upload-container {
+  position: relative;
+  display: flex;
+  align-items:left;
+  margin-left:10px;
+  
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-label {
+  display: inline-block;
+  background-color:purple;
+  padding: 5px;  
+  color: #fff;
+  cursor: pointer;
+  margin-left : 10px;
+  
+
+.upload-label i {
+  margin-right: 5px;
+}
+
+.upload-label:hover {
+ background-color: lightblue;
+}
+
+.upload-label:active {
+  background-color: lightblue;
+}
+.inline-element{
+	display:inline;
+}

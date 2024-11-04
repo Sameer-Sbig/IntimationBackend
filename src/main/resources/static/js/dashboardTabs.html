@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>PMS-Search</title>
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
+<link th:href="@{/css/fontawesome-free-6.3.0-web/css/all.css}"
+	rel="stylesheet" />
+<link th:href="@{/css/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/sidebar.css}" rel="stylesheet" />
+<link th:href="@{/css/GetPolicyDetails.css}" rel="stylesheet" />
+<link href="./css/all.min.css" rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+<!-- Custom styles for this template-->
+<link href="./css/sb-admin-2.min.css" rel="stylesheet">
+<link href="./css/admin.css" rel="stylesheet">
+
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/common2.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<script type="text/javascript" th:src="@{/js/common_tab.js}"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body>
+	<input type="hidden" id="policyNumber" th:value="${policyNumber}">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<ul class="nav nav-tabs mt-5" id="myTabs">
+					<li class="nav-item"><a href="#"
+						onclick="getDetails('Policy')" class="nav-link active">Policy
+							Details</a></li>
+					<li class="nav-item"><a href="#"
+						onclick="getDetails('Member')" class="nav-link">Member Details</a></li>
+					<li class="nav-item"><a href="#" onclick="getDetails('Claim')"
+						class="nav-link">Claims Details</a></li>
+					<li class="nav-item"><a href="#"
+						onclick="getDetails('InsureMo')" class="nav-link">insureMo</a></li>
+					<li class="nav-item"><a href="#" onclick="getDetails('IIB')"
+						class="nav-link">Vahan Details</a></li>
+
+				</ul>
+
+				<div class="tab-content pt-3">
+					<div class="tab-pane active" id="policyTab">
+						<div id="policyTabTable"
+							class="table table-bordered table-striped table-sm"
+							th:include="tabPolicyDetails">
+							<!-- 						<tr> -->
+							<!-- 							<td> -->
+							<!-- 								<div id="policyDetailsTab"> -->
+							<!-- 									<table border="1" style="margin-bottom: 5vh;"> -->
+							<!-- 										<thead> -->
+							<!-- 											<tr> -->
+							<!-- 												<th class="paiTableColumn" -->
+							<!-- 													style="border-right: 1px solid #ffffffff; border-left: 1px solid #4e73df;">Policy -->
+							<!-- 													Number</th> -->
+							<!-- 												<th class="paiTableColumn" -->
+							<!-- 													style="border-right: 1px solid #ffffffff;">Customer -->
+							<!-- 													Name</th> -->
+							<!-- 												<th class="paiTableColumn" -->
+							<!-- 													style="border-right: 1px solid #ffffffff;">Email ID</th> -->
+							<!-- 												<th class="paiTableColumn" -->
+							<!-- 													style="border-right: 1px solid #ffffffff;">Product -->
+							<!-- 													Name</th> -->
+							<!-- 												<th class="paiTableColumn" -->
+							<!-- 													style="border-right: 1px solid #ffffffff;">Policy -->
+							<!-- 													Issue Date</th> -->
+							<!-- 												<th class="paiTableColumn" -->
+							<!-- 													style="border-right: 1px solid #ffffffff;">Policy -->
+							<!-- 													Start Date</th> -->
+							<!-- 												<th class="paiTableColumn" -->
+							<!-- 													style="border-right: 1px solid #4e73df;">Policy End -->
+							<!-- 													Date</th> -->
+							<!-- 											</tr> -->
+							<!-- 										</thead> -->
+							<!-- 										<tbody id="policyTableData"> -->
+							<!-- 											<tr th:each="policy : ${policyDetailList}"> -->
+							<!-- 												<td th:text="${policy.policy_Number}" -->
+							<!-- 													style="border: 1px solid #858796;"></td> -->
+							<!-- 												<td th:text="${policy.customer_Name}" -->
+							<!-- 													style="border: 1px solid #858796;"></td> -->
+							<!-- 												<td th:text="${policy.email_id}" -->
+							<!-- 													style="border: 1px solid #858796;"></td> -->
+							<!-- 												<td th:text="${policy.product_Name}" -->
+							<!-- 													style="border: 1px solid #858796;"></td> -->
+							<!-- 												<td th:text="${policy.policy_Issue_Date}" -->
+							<!-- 													style="border: 1px solid #858796;"></td> -->
+							<!-- 												<td th:text="${policy.policy_Start_Date}" -->
+							<!-- 													style="border: 1px solid #858796;"></td> -->
+							<!-- 												<td th:text="${policy.policy_End_Date}" -->
+							<!-- 													style="border: 1px solid #858796;"></td> -->
+							<!-- 												</th:block> -->
+							<!-- 											</tr> -->
+
+							<!-- 										</tbody> -->
+
+							<!-- 									</table> -->
+							<!-- 									<div class="col-lg-2 col-md-6 mb-6"> -->
+							<!-- 										<button th:onclick="getPDF('Policy')" -->
+							<!-- 											class="form-control btn btn-primary">GET -->
+							<!-- 											PDF</button> -->
+							<!-- 									</div> -->
+							<!-- 								</div> End of Main Content -->
+
+							<!-- 							</td> -->
+							<!-- 						</tr> -->
+						</div>
+					</div>
+					<div class="tab-pane" id="memberTab"></div>
+					<div class="tab-pane" id="tab3"></div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="./jquery/jquery.min.js"></script>
+	<script src="./jquery/common_tab.js"></script>
+</body>
+</html>

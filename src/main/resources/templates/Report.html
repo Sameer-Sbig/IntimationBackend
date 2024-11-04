@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Renewal Rms</title>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" />
+<link th:href="@{/css/fontawesome-free-6.3.0-web/css/all.css}"
+	rel="stylesheet" />
+<link th:href="@{/css/layout.css}" rel="stylesheet" />
+<link th:href="@{/css/header.css}" rel="stylesheet" />
+<link th:href="@{/css/sidebar.css}" rel="stylesheet" />
+<link th:href="@{/css/common.css}" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" th:src="@{/js/common2.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+</head>
+<style>
+
+  
+</style>
+<body>
+	<header id="header" th:include="header"> </header>
+	<div id="body">
+		<nav id="sidebar" th:include="sidebar"></nav>
+		<div id="main">
+			<!-- <div class="container-fluid blur-background"> -->
+
+			<!-- Page Heading -->
+
+
+			<div class="container my-1">
+				<form id="myForm" method="post"
+					style="max-width: 1300px; margin: 0 auto;"
+					th:Object="${RenewalRmsModel}" th:action="@{/Reports}">
+					<div class="container my-1">
+						<c:if test="${ !empty message}">
+							<div class="form-group text-center">
+								<font color="Red" id="message"></font>
+								<div ></div>
+							</div>
+						</c:if>
+						<div class="row1">
+
+							<b class="rsm_policy_det_title_head">Policy Report</b>
+							<div class="rms_policy_det_header_head">
+
+
+								<table width=100%>
+									<!-- 						  <tr> -->
+									<!-- 						    <thc class="text-center">Year </th> -->
+									<!-- 							<th width=14% class="text-center">Month</th> -->
+									<!-- 						    <th width=16% class="text-center">Lob</th> -->
+									<!-- 							<th width=16% class="text-center">Days</th> -->
+									<!-- 							<th width=16% class="text-center">Renewal Notice Status</th> -->
+									<!-- 							<th width=16% class="text-center">Product Type</th> -->
+									<!-- 						  </tr>				 -->
+									<tr>
+
+
+
+										<!-- 						      <td>Year</td> -->
+										<td width=10%><b class="rsm_policy_det_title">Year<span class="required">*</span></b>
+											<div class="rms_policy_det_header">
+												<select id="yearMCRS" class="form-control form-select"
+													name="year" required="required">
+													<option value="">Choose a Year::</option>																											
+												</select>
+											</div></td>
+										<!-- 							       <td>Month</td> -->
+										<td width=10%><b class="rsm_policy_det_title">Month<span class="required">*</span></b>
+											<div class="rms_policy_det_header">
+												<select id="monthMCRS" class="form-control form-select"
+													name="Month" required>
+														<option value="">Choose a Month::</option>
+													<option
+														th:each="monthIndex : ${#numbers.sequence(currentMonth.ordinal()-1, currentMonth.ordinal() + 2)}"
+														th:value="${(monthIndex % 12) + 1}"
+														th:selected="${monthIndex % 12 == currentMonth.ordinal()}">
+														<span
+															th:text="${T(java.time.Month).values()[(monthIndex % 12) ].getDisplayName(T(java.time.format.TextStyle).FULL, T(java.util.Locale).US)}"></span>
+													</option>
+												</select>
+											</div></td>
+										<!-- 							    <td>LOB</td> -->									
+													
+									<td width=3%><b class="rsm_policy_det_title"></b>
+											<div class="rms_policy_det_header" style="right-margin: 1px;">
+												<input type="button" id="searchBtn" class="btn btn-primary"
+													value="Submit" th:onclick="getSubmit()" />
+											</div></td>							
+									</tr>
+								</table>
+
+							</div>
+						</div>
+						<div style="margin-top: 10px"></div>
+						<table width=25%>
+							<tr>
+								<!-- <td width=15%><input type="button" id="exportBtn"
+									th:onclick="getRmsExcel()" value="Expot To Excel" /></td> -->
+								<!-- <td width=15%><input type="button" id="downloadBtn"
+									value="Download" /></td> -->
+								<td width=15%><input type="button" id="downloadAllBtn"
+								th:onclick="downloadNotice('','','downloadblk')" value="RN Download" /></td>
+
+							</tr>
+						</table>
+					</div>
+
+				</form>
+                
+				<div id="datacontainer1"></div>
+				<div id="sendSmsPopUp"></div>
+				<!-- Loading indicator with animation -->
+<div id="loadingIndicator">
+    
+    <div class="loading-spinner"></div>
+    <span class="loading-text">Loading...</span>
+</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script type="text/javascript">    
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the current year and month
+        var currentDate = new Date();
+        var currentYear = currentDate.getFullYear();
+        var currentMonth = currentDate.getMonth(); // January is 0, December is 11
+
+        // Populate the year dropdown with the current year and the next year
+        var yearDropdown = document.getElementById("yearMCRS");
+        for (var year = currentYear; year <= currentYear + 1; year++) {
+            var option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            yearDropdown.appendChild(option);
+        }
+
+        // Function to populate the month dropdown based on the selected year
+        function populateMonthDropdown(selectedYear) {
+            var monthDropdown = document.getElementById("monthMCRS");
+            monthDropdown.innerHTML = '<option value="">Choose a Month::</option>'; // Clear existing options
+
+            var startMonth = 0; // January
+            var endMonth = 11;  // December
+
+            if (selectedYear === currentYear) {
+                // If the selected year is the current year, restrict months from April (0-based) to December
+                startMonth = 3; // April
+            }
+            else if (selectedYear === currentYear + 1) {
+                // If the selected year is the next year, restrict months from January (0-based) to March
+                endMonth = 2; // March
+            }
+
+            for (var monthIndex = startMonth; monthIndex <= endMonth; monthIndex++) {
+                var option = document.createElement("option");
+                option.value = monthIndex + 1; // Months are 1-based
+                option.textContent = new Date(0, monthIndex).toLocaleString('en-US', { month: 'long' });
+                monthDropdown.appendChild(option);
+            }
+        }
+
+        // Initial population of month dropdown based on the current year
+        populateMonthDropdown(currentYear);
+
+        // Listen for changes in the year dropdown
+        yearDropdown.addEventListener("change", function () {
+            var selectedYear = parseInt(yearDropdown.value, 10);
+            populateMonthDropdown(selectedYear);
+        });
+    });
+</script>
+  </script>
+</html>

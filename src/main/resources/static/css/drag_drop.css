@@ -1,0 +1,96 @@
+
+.body-drag-area{
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   height:50%;
+  background:gray;
+  float:left;
+  margin-top:20px;
+}
+
+.drag-area-description {
+	float: right;
+	width: 30%;
+	padding : 20px;
+/* 	background: lightgray; */
+	min-height: calc(100vh - 215px);
+}
+
+.drag-area-description tr {
+	height:50px;
+}
+
+.doc_preview_area {
+	border: 1px dashed #fff;
+	height: calc(100vh - 230px);
+	width: calc(100vw - 550px);
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin : 10px;
+}
+
+.drag-area{
+  border: 2px dashed #fff;
+  height:50%;
+  width: 700px;  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.drag-area.active{
+  border: 2px solid #fff;
+   background: lightblue;
+  color: #5256ad;
+  font-size: 25px;
+  font-weight: 500;
+  height:25%;
+}
+.drag-area .icon{
+  font-size: 100px;
+  color: #fff;
+}
+.drag-area header{
+  font-size: 20px;
+  font-weight: 100;
+  color: #fff;
+}
+.drag-area span{
+  font-size: 20px;
+  font-weight: 100;
+  color: #fff;
+  margin: 10px 0 15px 0;
+}
+.drag-area #button_browse{
+  padding: 10px 15px;
+  font-size: 20px;
+  font-weight: 200;
+  border: none;
+  outline: none;
+  background: #lightblue;
+  color: #5256ad;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.drag-area img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.drag-area upload_file{
+font-size: 20px; 
+background: red;
+color: #5256ad;
+margin-left:03px;
+margin-top:300px;
+width:2s0%;
+border-radius:5px; 
+padding: 10px 10px;
+}
