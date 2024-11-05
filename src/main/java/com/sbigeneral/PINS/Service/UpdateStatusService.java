@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.sbigeneral.PINS.Entity.UploadImage;
 
+
 @Service
 public interface UpdateStatusService {
 	

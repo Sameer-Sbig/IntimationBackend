@@ -78,6 +78,7 @@ public class UpdateStatusImpl implements UpdateStatusService {
 
         } catch (Exception e) {
             logger.error("Internal Server Error: {}", e.getMessage());
+            System.out.println(e.getMessage());
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("message", "Internal Server Error");
             errorResponse.put("pinNumber", obj.getPinNumber());

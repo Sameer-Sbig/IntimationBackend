@@ -14,11 +14,11 @@ public class UploadImage {
     private String decision;
 
     @JsonProperty("decisionDate")
-    private Timestamp decisionDate;
-
+    private String decisionDate;
+//    private Timestamp
     @JsonProperty("inspectionDate")
-    private Timestamp inspectionDate;
-
+    private String inspectionDate;
+//    private Timestamp
     @JsonProperty("remarks")
     private String remarks;
 
@@ -53,19 +53,19 @@ public class UploadImage {
         this.decision = decision;
     }
 
-    public Timestamp getDecisionDate() {
+    public String getDecisionDate() {
         return decisionDate;
     }
 
-    public void setDecisionDate(Timestamp decisionDate) {
+    public void setDecisionDate(String decisionDate) {
         this.decisionDate = decisionDate;
     }
 
-    public Timestamp getInspectionDate() {
+    public String getInspectionDate() {
         return inspectionDate;
     }
 
-    public void setInspectionDate(Timestamp inspectionDate) {
+    public void setInspectionDate(String inspectionDate) {
         this.inspectionDate = inspectionDate;
     }
 
