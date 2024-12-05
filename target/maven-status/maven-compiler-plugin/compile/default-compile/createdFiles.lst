@@ -11,5 +11,6 @@ com\sbigeneral\SECUREAPI\Service\Decrypt.class
 com\sbigeneral\SECUREAPI\Entity\SecurePolicyInfo.class
 com\sbigeneral\SECUREAPI\ServiceImpl\EncryptImpl.class
 com\sbigeneral\SECUREAPI\config\WebLogicConfig.class
+com\sbigeneral\SECUREAPI\Controller\fetchDetails.class
 com\sbigeneral\SECUREAPI\ServiceImpl\DecryptImpl.class
 com\sbigeneral\SECUREAPI\Service\ApiService.class

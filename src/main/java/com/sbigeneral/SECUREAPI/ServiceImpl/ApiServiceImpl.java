@@ -4,16 +4,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.*;
+import org.springframework.web.client.RestTemplate;
 
 import com.sbigeneral.SECUREAPI.Controller.getPolicyInfoController;
 import com.sbigeneral.SECUREAPI.Entity.SecurePolicyInfo;
@@ -26,7 +32,9 @@ public class ApiServiceImpl implements ApiService {
     
     @Autowired
 	private DataSource dataSource;
-  
+    
+    @Value("${myapp.getPolicyInfo}")
+    private String getReportLink;
   
 	@Override
 	public ResponseEntity<?> getSecurePolicyInfo(String policyNumber) {
@@ -83,5 +91,36 @@ public class ApiServiceImpl implements ApiService {
 //		return (ResponseEntity<?>) results;
 		 return new ResponseEntity<>(results, HttpStatus.OK);
 	}
-    
+
+
+	@Override
+	public ResponseEntity<?> fetchSecurePolicyInfo(String policyNumber) {
+		// TODO Auto-generated method stub
+		 MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+	        Map map = new HashMap<String, String>();
+	        map.put("Content-Type", "application/json");
+
+	        headers.setAll(map);
+
+	        Map req_payload = new HashMap();
+	        req_payload.put("policyNumber", policyNumber);
+
+	        HttpEntity<?> request = new HttpEntity<>(req_payload, headers);
+	        
+
+			ResponseEntity<?> response = null;
+			try {
+		logger.info("API Url is :" + getReportLink);
+		response = new RestTemplate().postForEntity(getReportLink, request, String.class);
+	        System.out.println("The response is " +response.getBody());
+	        
+		
+	} catch (Exception e) {
+		// TODO: handle exception
+		logger.error(e);
+		return new ResponseEntity<>("Something went wrong",HttpStatus.BAD_GATEWAY);
+	}
+	return new ResponseEntity<>(response.getBody(),HttpStatus.OK);
+	}
+    	
 }

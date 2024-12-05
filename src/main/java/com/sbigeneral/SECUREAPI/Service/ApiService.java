@@ -8,4 +8,5 @@ public interface ApiService {
 
     
     public ResponseEntity<?> getSecurePolicyInfo(String policyNumber);
+    public ResponseEntity<?> fetchSecurePolicyInfo(String policyNumber);
 }
