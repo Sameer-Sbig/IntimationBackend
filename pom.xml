@@ -10,11 +10,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sbig</groupId>
-	<artifactId>SECUREAPI</artifactId>
+	<artifactId>Intimation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>SECUREAPI</name>
-	<description>SECUREAPI</description>
+	<name>Intimation</name>
+	<description>Intimation</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<log4j2.version>2.11.0</log4j2.version>
@@ -40,6 +40,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
 		</dependency>
 		<!-- Exclude the default Logback dependency -->
 		<dependency>
@@ -137,7 +141,7 @@
 			<artifactId>commons-csv</artifactId>
 			<version>1.5</version>
 		</dependency>
-<!--		<dependency>
+		<!--		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
@@ -170,7 +174,7 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-			<dependency>
+		<dependency>
 			<groupId>com.giffing.bucket4j.spring.boot.starter</groupId>
 			<artifactId>bucket4j-spring-boot-starter</artifactId>
 			<version>0.7.0</version>
@@ -183,7 +187,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>SECUREAPI</finalName>
+		<finalName>Intimation</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
