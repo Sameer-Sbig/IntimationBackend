@@ -4,9 +4,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.sbigeneral.Intimation.model.Claims;
+import com.sbigeneral.Intimation.model.MainObject;
 
 @Service
-public interface HealthIntimationDevApi {
-	public ResponseEntity<?> IntimateDevApiService(String encryptedData);
+public interface MotorIntimationDevApi {
+	public ResponseEntity<?> IntimateDevApiService(MainObject obj);
 
 }

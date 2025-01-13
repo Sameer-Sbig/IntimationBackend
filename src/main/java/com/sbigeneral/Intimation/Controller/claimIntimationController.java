@@ -15,7 +15,7 @@ import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 import com.sbigeneral.Intimation.Entity.MotorIntimation;
 import com.sbigeneral.Intimation.Service.Encrypt;
 import com.sbigeneral.Intimation.Service.HealthClaimIntimationService;
-import com.sbigeneral.Intimation.Service.HealthIntimationDevApi;
+import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;
 import com.sbigeneral.Intimation.Service.MotorClaimIntimation;
 import com.sbigeneral.Intimation.model.Claims;
 import com.sbigeneral.Intimation.model.ClaimsWrapper;
@@ -40,7 +40,7 @@ public class claimIntimationController {
 	private HealthClaimIntimationService healthClaimService;
 
 	@Autowired
-	private HealthIntimationDevApi healthClaimServiceDevApi;
+	private MotorIntimationDevApi motorClaimServiceDevApi;
 
 	@PostMapping("/motorClaimIntimation")
 	public ResponseEntity<?> createAIntimation(@RequestBody MotorIntimation object) {
@@ -53,7 +53,7 @@ public class claimIntimationController {
 		return healthClaimService.saveHealthClaim(obj);
 	}
 
-	@PostMapping("/healthClaimIntimationMotoveyss")
+	@PostMapping("/motorClaimIntimationMotoveyss")
 	public ResponseEntity<?> intimateHealthClaim(@RequestBody MainObject obj) {
 
 		System.out.println("Inside controller");
@@ -67,7 +67,7 @@ public class claimIntimationController {
 			encryptedData = encrypt.encrypt(obj.getClaims(), "05y/Zh9tsXeFAkRCz93poem27hMLV2iX", "VTXb7e2p1iQ=");
 
 			System.out.println("Encrypted data is :" + encryptedData);
-			return healthClaimServiceDevApi.IntimateDevApiService(encryptedData);
+			return motorClaimServiceDevApi.IntimateDevApiService(obj);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -79,5 +79,7 @@ public class claimIntimationController {
 		// return null;
 
 	}
+	
+
 
 }
