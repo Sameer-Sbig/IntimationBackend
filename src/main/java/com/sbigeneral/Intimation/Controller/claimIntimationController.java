@@ -28,7 +28,7 @@ import com.sbigeneral.Intimation.model.MainObject;
 
 @PropertySource("classpath:log4j2.properties")
 public class claimIntimationController {
-	private static final Logger logger = LogManager.getLogger(getPolicyInfoController.class);
+//	private static final Logger logger = LogManager.getLogger(getPolicyInfoController.class);
 
 	@Autowired
 	private MotorClaimIntimation motorClaimService;
@@ -41,6 +41,7 @@ public class claimIntimationController {
 
 	@Autowired
 	private MotorIntimationDevApi motorClaimServiceDevApi;
+	private static final Logger logger = LogManager.getLogger(claimIntimationController.class);
 
 	@PostMapping("/motorClaimIntimation")
 	public ResponseEntity<?> createAIntimation(@RequestBody MotorIntimation object) {
@@ -56,7 +57,8 @@ public class claimIntimationController {
 	@PostMapping("/motorClaimIntimationMotoveyss")
 	public ResponseEntity<?> intimateHealthClaim(@RequestBody MainObject obj) {
 
-		System.out.println("Inside controller");
+//		System.out.println("Inside controller");
+		
 
 		System.out.println(obj.getClaims());
 //		System.out.println(obj.getInsuranceCompany());
@@ -64,15 +66,17 @@ public class claimIntimationController {
 
 		String encryptedData;
 		try {
-			encryptedData = encrypt.encrypt(obj.getClaims(), "05y/Zh9tsXeFAkRCz93poem27hMLV2iX", "VTXb7e2p1iQ=");
+//			encryptedData = encrypt.encrypt(obj.getClaims(), "05y/Zh9tsXeFAkRCz93poem27hMLV2iX", "VTXb7e2p1iQ=");
 
-			System.out.println("Encrypted data is :" + encryptedData);
+//			System.out.println("Encrypted data is :" + encryptedData);
+			logger.info("The obj is " + obj);
 			return motorClaimServiceDevApi.IntimateDevApiService(obj);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println(e.getMessage());
+			logger.info(e.getMessage());
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 

@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "bfab2101-4a00-4381-9c2d-594b6b768fb6",
+		"name": "ClaimIntimation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36989078"
+	},
+	"item": [
+		{
+			"name": "ICIntimation",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "458b817795bad480c5c59e6c424fd285",
+						"type": "text"
+					},
+					{
+						"key": "X-IBM-Client-Secret",
+						"value": "51d9ae9279382a4fa6f1becd4c41ca84",
+						"type": "text"
+					},
+					{
+						"key": "KEY",
+						"value": "05y/Zh9tsXeFAkRCz93poem27hMLV2iX",
+						"type": "text"
+					},
+					{
+						"key": "IV",
+						"value": "VTXb7e2p1iQ=",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0NThiODE3Nzk1YmFkNDgwYzVjNTllNmM0MjRmZDI4NSIsImF1ZCI6IjUxZDlhZTkyNzkzODJhNGZhNmYxYmVjZDRjNDFjYTg0IiwiZXhwIjoxNzM0NjA3NDY3LCJpYXQiOjE3MzQ2MDcyODd9.lwRM8M1b6agxxYZ34TLGR7rQ7DrQHZNV7tr79JXmHHY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ciphertext\": \"FVQOLcsAEx2GcNP8i7d8uGEziyZAnCKduEv0pHV6FBCrvjU4YG8BeIUjFf8ta+7cFrCUPP/c7gu5x1eaK/hvhGraU1Z38bPqhyCR3gIajeUCoc1jUr6J1LZcSujaOQ4EaCJQOJWzI0SOWlzp9SHXwEZbSoTfQP12dFZ4xNEFHL+wq5Gm518DcpVJZ1+Svlc8hhbgCLgvSfukH13L9yM9O9B0GP4p8a3NXpw1uSKkY4eypR6cdfRJ0FDrPankyp3zMuhBL1ibib364KEx4tXEfrCXwD64W33Bm3gvBPMuefyS89veM2iLSd78xbmuB1yRb4UAyIy89jlbgbCZytQVF1G1PDc3kFkSm6mzFob1u/ykCrhbbdP4edpFIOSUecwNQmpDpd8/vH4YKiQ/T1MvBSd/ll7zvroqBxhgmqdzz1e5aXZGlAMfRxvIZK/YUWHECAXfCYly6Xj1ETOISwDfypehI4zxdBOMnWq8cbkVIzkBh7qUIvKeQKbFVz0hQETR39qH1SuGgm6tSOvIc2/JWB8Acb+Eu/+Fj7sa4LIS/0Nk3jJG3DQuPNMzaIFUM6o8I+MM5T/3GRPkMroqqQgxkG5Xl7DlkodOvsxxUR0WIOJMbwUY9gFSwM/bs8aAkFf38uig2PWsUmypvQjNcy0TLjp/t3PDq8L0e8AASgzdihzfgkKza8YBkVoSKNypQ6zDiixzipZ5oMyDIA/8ec50cod4v9vSPTsM2iGPfCRDvw9NKQKvrm2Nzn2+qfGnIzGOfwkktd6oEgNRAQp46VIbu5ZHXo40GPIQwa1+cm6s0Iv/GRAunfTIEbTfEdBqinwjw5zu2OjmtICcXVJ2xF5diYpEu8IRWLAv212HY3WPB+SfWWrL12feVkXwS/d27qQs3Q2zAd5pwKNH1Fy6MQ==\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://devapi.sbigeneral.in/v1/Motoveys/API1/ICIntimation",
+					"protocol": "https",
+					"host": [
+						"devapi",
+						"sbigeneral",
+						"in"
+					],
+					"path": [
+						"v1",
+						"Motoveys",
+						"API1",
+						"ICIntimation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getToken",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "458b817795bad480c5c59e6c424fd285",
+						"type": "text"
+					},
+					{
+						"key": "X-IBM-Client-Secret",
+						"value": "51d9ae9279382a4fa6f1becd4c41ca84",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://devapi.sbigeneral.in/v1/tokens",
+					"protocol": "https",
+					"host": [
+						"devapi",
+						"sbigeneral",
+						"in"
+					],
+					"path": [
+						"v1",
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "healthClaimIntimationMotoveyss",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"Claims\": {\r\n        \"Claim\": {\r\n            \"PolicyNumber\": \"0000000000356989\",\r\n            \"RegistrationNumber\": \"MH-04-AU-1238\",\r\n            \"InsuredName\": \"John Doe\", \r\n            \"ClaimServicingBranch\": \"SBI123\",\r\n            \"MobileNumber\": \"1234567890\",\r\n            \"InsuredEmailId\": \"johndoe@example.com\",\r\n            \"AccidentDateTime\": \"20/01/2024 14:30:00\",\r\n            \"LossState\": \"Maharashtra\",\r\n            \"LossCity\": \"Mumbai\",\r\n            \"DriverName\": \"John Doe\",\r\n            \"LossDescription\": \"Car accident\",\r\n            \"NatureOfLoss\": \"Motor OD\", \r\n            \"SurveyPlaceOrGarageNameAddress\": \"ABC Garage, XYZ Street\",\r\n            \"WorkshopId\": \"DEAL123\",\r\n            \"DrivingLicenseNumber\": \"DL1234567890\",\r\n            \"EstimatedClaimAmount\": \"5000.00\",\r\n            \"ModeOfIntimation\": \"Email\"\r\n        },\r\n        \"InsuranceComapany\": \"SBIGCL\",\r\n        \"ServiceType\": \"Intimation\",\r\n        \"TieUpClaimId\": \"IC1523567\",\r\n        \"UserId\": \"20063258\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7002/Intimation/motorClaimIntimationMotoveyss",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7002",
+					"path": [
+						"Intimation",
+						"motorClaimIntimationMotoveyss"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "\thttp://172.18.115.105:7003/Intimation/motorClaimIntimationMotoveyss",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"Claims\": {\r\n        \"Claim\": {\r\n            \"PolicyNumber\": \"0000000000356989\",\r\n            \"RegistrationNumber\": \"MH-04-AU-1238\",\r\n            \"InsuredName\": \"John Doe\", \r\n            \"ClaimServicingBranch\": \"SBI123\",\r\n            \"MobileNumber\": \"1234567890\",\r\n            \"InsuredEmailId\": \"johndoe@example.com\",\r\n            \"AccidentDateTime\": \"20/01/2024 14:30:00\",\r\n            \"LossState\": \"Maharashtra\",\r\n            \"LossCity\": \"Mumbai\",\r\n            \"DriverName\": \"John Doe\",\r\n            \"LossDescription\": \"Car accident\",\r\n            \"NatureOfLoss\": \"Motor OD\", \r\n            \"SurveyPlaceOrGarageNameAddress\": \"ABC Garage, XYZ Street\",\r\n            \"WorkshopId\": \"DEAL123\",\r\n            \"DrivingLicenseNumber\": \"DL1234567890\",\r\n            \"EstimatedClaimAmount\": \"5000.00\",\r\n            \"ModeOfIntimation\": \"Email\"\r\n        },\r\n        \"InsuranceComapany\": \"SBIGCL\",\r\n        \"ServiceType\": \"Intimation\",\r\n        \"TieUpClaimId\": \"IC1523567\",\r\n        \"UserId\": \"20063258\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://172.18.115.105:7003/Intimation/motorClaimIntimationMotoveyss",
+					"protocol": "http",
+					"host": [
+						"172",
+						"18",
+						"115",
+						"105"
+					],
+					"port": "7003",
+					"path": [
+						"Intimation",
+						"motorClaimIntimationMotoveyss"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

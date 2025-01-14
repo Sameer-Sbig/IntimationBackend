@@ -3,6 +3,8 @@ package com.sbigeneral.Intimation.ServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sbigeneral.Intimation.Controller.claimIntimationController;
 import com.sbigeneral.Intimation.Entity.MotorIntimation;
 import com.sbigeneral.Intimation.Repository.MotorIntimationRepo;
 import com.sbigeneral.Intimation.Service.Decrypt;
@@ -21,6 +24,7 @@ import com.sbigeneral.Intimation.Service.DevApiTokenService;
 import com.sbigeneral.Intimation.Service.Encrypt;
 import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;
 import com.sbigeneral.Intimation.model.MainObject;
+
 
 @Service
 public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
@@ -35,7 +39,8 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 	
 	@Autowired
 	private MotorIntimationRepo motorIntimationRepo;
-
+	
+	private static final Logger logger = LogManager.getLogger(claimIntimationController.class);
 	@Override
 	public ResponseEntity<?> IntimateDevApiService(MainObject obj) {
 		String encryptedData;
@@ -43,8 +48,10 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 			encryptedData = encrypt.encrypt(obj.getClaims(), "05y/Zh9tsXeFAkRCz93poem27hMLV2iX", "VTXb7e2p1iQ=");
 
 			System.out.println("Encrypted data is :" + encryptedData);
+			logger.info("Encrypted data is" + encryptedData);
 			ResponseEntity<Map<String, String>> token = getToken.getToken();
 			System.out.println("The token is " + token.getBody());
+			logger.info("The token is " + token.getBody());
 			Map<String, String> reqBody = new HashMap<String, String>();
 			reqBody.put("ciphertext", encryptedData);
 			String apiUrl = "https://devapi.sbigeneral.in/v1/Motoveys/API1/ICIntimation";
@@ -59,8 +66,10 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 				ResponseEntity<Map<String, String>> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity,
 						responseType);
 				System.out.println(response);
+				logger.info("The response is " + response);
 				String response2 = decrypt.decrypt(response.getBody().get("ciphertext"),
 						 "VTXb7e2p1iQ=","05y/Zh9tsXeFAkRCz93poem27hMLV2iX");
+				logger.info("The decrypted response is " + response2);
 				ObjectMapper objectMapper = new ObjectMapper();
 				try {
 					 JsonNode rootNode = objectMapper.readTree(response2);
@@ -92,11 +101,13 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 		                motorIntimation.setUserId(obj.getClaims().getUserId());
 		                motorIntimation.setClaimServicingBranch(obj.getClaims().getClaim().getClaimServicingBranch());
 		                System.out.println("The motor obj is as :" + motorIntimation);
+		                logger.info("The motor obj is " + motorIntimation);
 		                motorIntimationRepo.save(motorIntimation);
 				} catch (Exception e) {
 					// TODO: handle exception
 					e.printStackTrace();
 					System.out.println("Error while exporting claim No" + e);
+					logger.warn("Error while exporting claim No "+e);
 				}
 				System.out.println(response2);
 				return new ResponseEntity<>(response2, HttpStatus.OK);
@@ -104,11 +115,13 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println(e);
+				logger.warn("The error is in Motoveys service blocks " +e);
 				return new ResponseEntity<>("Error In Motoveys Service", HttpStatus.BAD_GATEWAY);
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			logger.warn("Internal Server Error " + e);
 			return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 

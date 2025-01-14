@@ -1,8 +1,6 @@
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\ApiService.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Exception\AccountLockedException.java
-D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\HealthIntimationDevApiImpl.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\DevApiTokenService.java
-D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\HealthIntimationDevApi.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Repository\MotorIntimationRepo.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Intimation.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\model\ClaimsWrapper.java
@@ -11,8 +9,10 @@ D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\ApiServiceImpl.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Entity\MotorIntimation.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Exception\UserNotFoundException.java
+D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\model\MainObject.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\EncryptImpl.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Controller\claimIntimationController.java
+D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\MotorIntimationDevApi.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\model\Claims.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\Encrypt.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Controller\fetchDetails.java
@@ -21,6 +21,7 @@ D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Entity\
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Repository\HealthClaimIntimationRepo.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\MotorClaimIntimation.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServletInitializer.java
+D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\MotorIntimationDevApiImpl.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\MotorClaimIntimation.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Exception\GlobalExceptionHandler.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Controller\getPolicyInfoController.java
