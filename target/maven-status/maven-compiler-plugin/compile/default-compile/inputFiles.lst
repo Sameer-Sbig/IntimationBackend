@@ -6,6 +6,7 @@ D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Intimat
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\model\ClaimsWrapper.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\HealthClaimIntimationService.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\DecryptImpl.java
+D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Entity\PolicyDetails.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\ApiServiceImpl.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Entity\MotorIntimation.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Exception\UserNotFoundException.java

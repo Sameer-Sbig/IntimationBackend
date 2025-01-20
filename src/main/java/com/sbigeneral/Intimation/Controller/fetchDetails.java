@@ -31,5 +31,11 @@ public class fetchDetails {
 		ResponseEntity<?> response = apiService.fetchSecurePolicyInfo(PolicyNumber);
 		return response;
 	}
+	
+	@PostMapping("/getIntimationPolicyDetails")
+	public ResponseEntity<?> getIntimationPolicyDetails(@RequestBody String PolicyNumber){
+		ResponseEntity<?> response = apiService.getPolicyDetails(PolicyNumber);
+		return response;
+	}
 
 }

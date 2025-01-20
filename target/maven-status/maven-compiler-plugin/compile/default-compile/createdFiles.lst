@@ -25,6 +25,7 @@ com\sbigeneral\Intimation\ServiceImpl\DevApiTokenServiceImpl.class
 com\sbigeneral\Intimation\Exception\GlobalExceptionHandler.class
 com\sbigeneral\Intimation\ServiceImpl\DecryptImpl.class
 com\sbigeneral\Intimation\ServiceImpl\ApiServiceImpl.class
+com\sbigeneral\Intimation\Entity\PolicyDetails.class
 com\sbigeneral\Intimation\Repository\MotorIntimationRepo.class
 com\sbigeneral\Intimation\Exception\UserNotFoundException.class
 com\sbigeneral\Intimation\Service\DevApiTokenService.class

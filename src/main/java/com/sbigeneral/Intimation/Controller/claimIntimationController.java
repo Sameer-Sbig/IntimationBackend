@@ -56,19 +56,9 @@ public class claimIntimationController {
 
 	@PostMapping("/motorClaimIntimationMotoveyss")
 	public ResponseEntity<?> intimateHealthClaim(@RequestBody MainObject obj) {
-
-//		System.out.println("Inside controller");
-		
-
 		System.out.println(obj.getClaims());
-//		System.out.println(obj.getInsuranceCompany());
-//		return healthClaimServiceDevApi.IntimateDevApiService();
-
 		String encryptedData;
 		try {
-//			encryptedData = encrypt.encrypt(obj.getClaims(), "05y/Zh9tsXeFAkRCz93poem27hMLV2iX", "VTXb7e2p1iQ=");
-
-//			System.out.println("Encrypted data is :" + encryptedData);
 			logger.info("The obj is " + obj);
 			return motorClaimServiceDevApi.IntimateDevApiService(obj);
 
@@ -79,8 +69,6 @@ public class claimIntimationController {
 			logger.info(e.getMessage());
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
-		// return null;
 
 	}
 	
