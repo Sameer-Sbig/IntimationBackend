@@ -1,174 +1,180 @@
 package com.sbigeneral.Intimation.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Claim {
 	
 	
-	private String PolicyNumber;
+	private String policyNumber;
+	private String registrationNumber;
+	private String contactName;
+	private String claimServicingBranch;
+	private String contactNumber;
+	private String emailId;
+	private String accidentDateAndTime;
+	private String accidentCity;
+	private String vehicleInspectionAddress;
+	private String cityName;
+	private String stateName;
+	private String inspectionSpotLocation;
+	private String garage;
+	private String driverName;
+	private String isInsured;
+	private String claimIntimatedBy;
+	private String causeOfLoss;
+	private String others;
+	private String estimatedClaimAmount;
 	
-	private String RegistrationNumber;
 	
-	private String InsuredName;
-	
-	private String ClaimServicingBranch;
-	
-	private String MobileNumber;
-	
-	private String InsuredEmailId;
-	
-	private String AccidentDateTime;
-	
-	private String LossState;
-	
-	private String LossCity;
-	
-	private String DriverName;
-	
-	private String LossDescription;
-	
-	private String NatureOfLoss;
-	
-	private String SurveyPlaceOrGarageNameAddress;
-	
-	private String WorkshopId;
-	
-	private String DrivingLicenseNumber;
-	
-	private String EstimatedClaimAmount;
-	
-	private String ModeOfIntimation;
 	@JsonProperty("PolicyNumber")
 	public String getPolicyNumber() {
-		return PolicyNumber;
+		return policyNumber;
 	}
 	public void setPolicyNumber(String policyNumber) {
-		PolicyNumber = policyNumber;
+		this.policyNumber = policyNumber;
 	}
 	@JsonProperty("RegistrationNumber")
 	public String getRegistrationNumber() {
-		return RegistrationNumber;
+		return registrationNumber;
 	}
 	public void setRegistrationNumber(String registrationNumber) {
-		RegistrationNumber = registrationNumber;
+		this.registrationNumber = registrationNumber;
 	}
-	@JsonProperty("InsuredName")
-	public String getInsuredName() {
-		return InsuredName;
+	@JsonProperty("ContactName")
+	public String getContactName() {
+		return contactName;
 	}
-	public void setInsuredName(String insuredName) {
-		InsuredName = insuredName;
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
 	}
-	@JsonProperty("ClaimServicingBranch")
+	@JsonProperty("ClaimServicingbranch")
 	public String getClaimServicingBranch() {
-		return ClaimServicingBranch;
+		return claimServicingBranch;
 	}
 	public void setClaimServicingBranch(String claimServicingBranch) {
-		ClaimServicingBranch = claimServicingBranch;
+		this.claimServicingBranch = claimServicingBranch;
 	}
-	@JsonProperty("MobileNumber")
-	public String getMobileNumber() {
-		return MobileNumber;
+	@JsonProperty("ContactNumber")
+	public String getContactNumber() {
+		return contactNumber;
 	}
-	public void setMobileNumber(String mobileNumber) {
-		MobileNumber = mobileNumber;
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
 	}
-	@JsonProperty("InsuredEmailId")
-	public String getInsuredEmailId() {
-		return InsuredEmailId;
+	@JsonProperty("emailID")
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setInsuredEmailId(String insuredEmailId) {
-		InsuredEmailId = insuredEmailId;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
-	@JsonProperty("AccidentDateTime")
-	public String getAccidentDateTime() {
-		return AccidentDateTime;
+	@JsonProperty("AccidentDateandtime")
+	public String getAccidentDateAndTime() {
+		return accidentDateAndTime;
 	}
-	public void setAccidentDateTime(String accidentDateTime) {
-		AccidentDateTime = accidentDateTime;
+	public void setAccidentDateAndTime(String accidentDateAndTime) {
+		this.accidentDateAndTime = accidentDateAndTime;
 	}
-	@JsonProperty("LossState")
-	public String getLossState() {
-		return LossState;
+	@JsonProperty("AccidentCity")
+	public String getAccidentCity() {
+		return accidentCity;
 	}
-	public void setLossState(String lossState) {
-		LossState = lossState;
+	public void setAccidentCity(String accidentCity) {
+		this.accidentCity = accidentCity;
 	}
-	@JsonProperty("LossCity")
-	public String getLossCity() {
-		return LossCity;
+	@JsonProperty("VehicleInspectionAddress")
+	public String getVehicleInspectionAddress() {
+		return vehicleInspectionAddress;
 	}
-	public void setLossCity(String lossCity) {
-		LossCity = lossCity;
+	public void setVehicleInspectionAddress(String vehicleInspectionAddress) {
+		this.vehicleInspectionAddress = vehicleInspectionAddress;
+	}
+	@JsonProperty("CityName")
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	@JsonProperty("StateName")
+	public String getStateName() {
+		return stateName;
+	}
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
+	@JsonProperty("InspectionSpotLocation")
+	public String getInspectionSpotLocation() {
+		return inspectionSpotLocation;
+	}
+	public void setInspectionSpotLocation(String inspectionSpotLocation) {
+		this.inspectionSpotLocation = inspectionSpotLocation;
+	}
+	@JsonProperty("Garage")
+	public String getGarage() {
+		return garage;
+	}
+	public void setGarage(String garage) {
+		this.garage = garage;
 	}
 	@JsonProperty("DriverName")
 	public String getDriverName() {
-		return DriverName;
+		return driverName;
 	}
 	public void setDriverName(String driverName) {
-		DriverName = driverName;
+		this.driverName = driverName;
 	}
-	@JsonProperty("LossDescription")
-	public String getLossDescription() {
-		return LossDescription;
+	@JsonProperty("isInsured")
+	public String getIsInsured() {
+		return isInsured;
 	}
-	public void setLossDescription(String lossDescription) {
-		LossDescription = lossDescription;
+	public void setIsInsured(String isInsured) {
+		this.isInsured = isInsured;
 	}
-	@JsonProperty("NatureOfLoss")
-	public String getNatureOfLoss() {
-		return NatureOfLoss;
+	@JsonProperty("ClaimIntimatedBy")
+	public String getClaimIntimatedBy() {
+		return claimIntimatedBy;
 	}
-	public void setNatureOfLoss(String natureOfLoss) {
-		NatureOfLoss = natureOfLoss;
+	public void setClaimIntimatedBy(String claimIntimatedBy) {
+		this.claimIntimatedBy = claimIntimatedBy;
 	}
-	@JsonProperty("SurveyPlaceOrGarageNameAddress")
-	public String getSurveyPlaceOrGarageNameAddress() {
-		return SurveyPlaceOrGarageNameAddress;
+	@JsonProperty("CauseOfLoss")
+	public String getCauseOfLoss() {
+		return causeOfLoss;
 	}
-	public void setSurveyPlaceOrGarageNameAddress(String surveyPlaceOrGarageNameAddress) {
-		SurveyPlaceOrGarageNameAddress = surveyPlaceOrGarageNameAddress;
+	public void setCauseOfLoss(String causeOfLoss) {
+		this.causeOfLoss = causeOfLoss;
 	}
-	@JsonProperty("WorkshopId")
-	public String getWorkshopId() {
-		return WorkshopId;
+	@JsonProperty("Others")
+	public String getOthers() {
+		return others;
 	}
-	public void setWorkshopId(String workshopId) {
-		WorkshopId = workshopId;
-	}
-	@JsonProperty("DrivingLicenseNumber")
-	public String getDrivingLicenseNumber() {
-		return DrivingLicenseNumber;
-	}
-	public void setDrivingLicenseNumber(String drivingLicenseNumber) {
-		DrivingLicenseNumber = drivingLicenseNumber;
+	public void setOthers(String others) {
+		this.others = others;
 	}
 	@JsonProperty("EstimatedClaimAmount")
 	public String getEstimatedClaimAmount() {
-		return EstimatedClaimAmount;
+		return estimatedClaimAmount;
 	}
 	public void setEstimatedClaimAmount(String estimatedClaimAmount) {
-		EstimatedClaimAmount = estimatedClaimAmount;
-	}
-	@JsonProperty("ModeOfIntimation")
-	public String getModeOfIntimation() {
-		return ModeOfIntimation;
-	}
-	public void setModeOfIntimation(String modeOfIntimation) {
-		ModeOfIntimation = modeOfIntimation;
+		this.estimatedClaimAmount = estimatedClaimAmount;
 	}
 	@Override
 	public String toString() {
-		return "Claim [PolicyNumber=" + PolicyNumber + ", RegistrationNumber=" + RegistrationNumber + ", InsuredName="
-				+ InsuredName + ", ClaimServicingBranch=" + ClaimServicingBranch + ", MobileNumber=" + MobileNumber
-				+ ", InsuredEmailId=" + InsuredEmailId + ", AccidentDateTime=" + AccidentDateTime + ", LossState="
-				+ LossState + ", LossCity=" + LossCity + ", DriverName=" + DriverName + ", LossDescription="
-				+ LossDescription + ", NatureOfLoss=" + NatureOfLoss + ", SurveyPlaceOrGarageNameAddress="
-				+ SurveyPlaceOrGarageNameAddress + ", WorkshopId=" + WorkshopId + ", DrivingLicenseNumber="
-				+ DrivingLicenseNumber + ", EstimatedClaimAmount=" + EstimatedClaimAmount + ", ModeOfIntimation="
-				+ ModeOfIntimation + "]";
+		return "Claim [policyNumber=" + policyNumber + ", registrationNumber=" + registrationNumber + ", contactName="
+				+ contactName + ", claimServicingBranch=" + claimServicingBranch + ", contactNumber=" + contactNumber
+				+ ", emailId=" + emailId + ", accidentDateAndTime=" + accidentDateAndTime + ", accidentCity="
+				+ accidentCity + ", vehicleInspectionAddress=" + vehicleInspectionAddress + ", cityName=" + cityName
+				+ ", stateName=" + stateName + ", inspectionSpotLocation=" + inspectionSpotLocation + ", garage="
+				+ garage + ", driverName=" + driverName + ", isInsured=" + isInsured + ", claimIntimatedBy="
+				+ claimIntimatedBy + ", causeOfLoss=" + causeOfLoss + ", others=" + others + ", estimatedClaimAmount="
+				+ estimatedClaimAmount + "]";
 	}
+	
+	
+	
+	
 	
 	
 

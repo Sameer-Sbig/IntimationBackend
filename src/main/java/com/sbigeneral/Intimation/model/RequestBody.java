@@ -2,7 +2,7 @@ package com.sbigeneral.Intimation.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MainObject {
+public class RequestBody {
 
 	
 	private Claims claims;
@@ -14,6 +14,12 @@ public class MainObject {
 	public void setClaims(Claims claims) {
 		this.claims = claims;
 	}
+
+	@Override
+	public String toString() {
+		return "RequestBody [claims=" + claims + "]";
+	}
+	
 	
 	
 }

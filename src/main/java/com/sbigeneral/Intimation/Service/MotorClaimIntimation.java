@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.sbigeneral.Intimation.Entity.MotorIntimation;
 
-@Service
-public interface MotorClaimIntimation {
-	public ResponseEntity<?> notifyClaim(MotorIntimation object);
-
-}
+//@Service
+//public interface MotorClaimIntimation {
+//	public ResponseEntity<?> notifyClaim(MotorIntimation object);
+//
+//}

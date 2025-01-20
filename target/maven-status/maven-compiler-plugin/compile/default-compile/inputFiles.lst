@@ -7,10 +7,11 @@ D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\model\C
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\HealthClaimIntimationService.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\DecryptImpl.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Entity\PolicyDetails.java
+D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Entity\MotorClaimIntimation.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\ApiServiceImpl.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Entity\MotorIntimation.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Exception\UserNotFoundException.java
-D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\model\MainObject.java
+D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\model\MainObject2.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\EncryptImpl.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Controller\claimIntimationController.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\MotorIntimationDevApi.java
@@ -24,7 +25,9 @@ D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServletInitializer.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\MotorIntimationDevApiImpl.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\ServiceImpl\MotorClaimIntimation.java
+D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\model\RequestHeader.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Exception\GlobalExceptionHandler.java
+D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\model\RequestBody.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Controller\getPolicyInfoController.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\config\RateLimitingConfig.java
 D:\SpringBootProjects\Intimation\src\main\java\com\sbigeneral\Intimation\Service\Decrypt.java

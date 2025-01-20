@@ -1,4 +1,5 @@
 com\sbigeneral\Intimation\Controller\fetchDetails.class
+com\sbigeneral\Intimation\Entity\MotorClaimIntimation.class
 com\sbigeneral\Intimation\Controller\claimIntimationController.class
 com\sbigeneral\Intimation\Exception\AccountLockedException.class
 com\sbigeneral\Intimation\model\Claim.class
@@ -9,15 +10,15 @@ com\sbigeneral\Intimation\model\Claims.class
 com\sbigeneral\Intimation\Repository\HealthClaimIntimationRepo.class
 com\sbigeneral\Intimation\ServiceImpl\MotorIntimationDevApiImpl.class
 com\sbigeneral\Intimation\Service\Decrypt.class
+com\sbigeneral\Intimation\model\MainObject2.class
+com\sbigeneral\Intimation\model\RequestBody.class
 com\sbigeneral\Intimation\model\ClaimsWrapper.class
 com\sbigeneral\Intimation\ServiceImpl\EncryptImpl.class
+com\sbigeneral\Intimation\model\RequestHeader.class
 com\sbigeneral\Intimation\ServiceImpl\HealthClaimIntimationServiceImpl.class
-com\sbigeneral\Intimation\model\MainObject.class
-com\sbigeneral\Intimation\Service\MotorClaimIntimation.class
 com\sbigeneral\Intimation\Intimation.class
 com\sbigeneral\Intimation\config\WebLogicConfig.class
 com\sbigeneral\Intimation\Service\ApiService.class
-com\sbigeneral\Intimation\ServiceImpl\MotorClaimIntimation.class
 com\sbigeneral\Intimation\config\RateLimitingConfig.class
 com\sbigeneral\Intimation\Service\Encrypt.class
 com\sbigeneral\Intimation\Service\HealthClaimIntimationService.class
