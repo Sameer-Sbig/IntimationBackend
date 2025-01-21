@@ -51,6 +51,9 @@ public class PolicyDetails {
 	
 	@Column(name="CHASISNO")
 	private String chasisNo;
+	
+	@Column(name="LOB")
+	private String lob;
 
 	public int getId() {
 		return Id;
@@ -164,15 +167,25 @@ public class PolicyDetails {
 		this.chasisNo = chasisNo;
 	}
 
+	public String getLob() {
+		return lob;
+	}
+
+	public void setLob(String lob) {
+		this.lob = lob;
+	}
+
 	@Override
 	public String toString() {
 		return "PolicyDetails [Id=" + Id + ", policyNo=" + policyNo + ", customerName=" + customerName + ", emailID="
 				+ emailID + ", mobileNo=" + mobileNo + ", alternateMobileNo=" + alternateMobileNo
 				+ ", alternateEmailId=" + alternateEmailId + ", policyStartDate=" + policyStartDate + ", policyEndDate="
 				+ policyEndDate + ", productName=" + productName + ", registrationNo=" + registrationNo
-				+ ", drivingLicenseNo=" + drivingLicenseNo + ", engineNo=" + engineNo + ", chasisNo=" + chasisNo + "]";
+				+ ", drivingLicenseNo=" + drivingLicenseNo + ", engineNo=" + engineNo + ", chasisNo=" + chasisNo
+				+ ", lob=" + lob + "]";
 	}
-	
+
+
 	
 	
 

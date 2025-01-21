@@ -9,12 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sbigeneral.Intimation.Service.ApiService;
 import com.sbigeneral.Intimation.Service.Decrypt;
-import com.sbigeneral.Intimation.Service.Encrypt;
-
 import io.github.bucket4j.Bucket;
 
 @Controller
@@ -32,8 +29,7 @@ public class getPolicyInfoController {
 	Decrypt decryptService;
 	@Autowired
 	ObjectMapper objectMapper;
-	@Autowired
-	private Encrypt encrypt;
+
 
 	@Autowired
 	Bucket bucket;

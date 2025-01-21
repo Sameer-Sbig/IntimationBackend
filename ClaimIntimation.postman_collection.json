@@ -170,57 +170,6 @@
 			"response": []
 		},
 		{
-			"name": "/chatbot/claimintimation",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-IBM-Client-Id",
-						"value": "458b817795bad480c5c59e6c424fd285",
-						"type": "text"
-					},
-					{
-						"key": "X-IBM-Client-Secret",
-						"value": "51d9ae9279382a4fa6f1becd4c41ca84",
-						"type": "text"
-					},
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0NThiODE3Nzk1YmFkNDgwYzVjNTllNmM0MjRmZDI4NSIsImF1ZCI6IjUxZDlhZTkyNzkzODJhNGZhNmYxYmVjZDRjNDFjYTg0IiwiZXhwIjoxNzM2OTMzOTA5LCJpYXQiOjE3MzY5MzM3Mjl9.AHnkedhcNwYjV6ZqpadFHsju0lDQWbKmOGk3tXMl6Yg",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"RequestHeader\": {\r\n        \"\"requestID\"\": \"\"123456\"\",\r\n        \"\"action\"\": \"\"claimIntimation\"\",\r\n        \"\"channel\"\": \"\"SBIG\"\",\r\n        \"\"transactionTimestamp\"\": \"\"14-Jan-2025-16:41:23\"\"\r\n    },\r\n    \"\"RequestBody\"\": {\r\n        \"Claims\": {\r\n            \"ServiceType\": \"Intimation\",\r\n            \"TieUpClaimId\": 7368530837,\r\n            \"UserId\": \"20063258\",\r\n            \"InsuranceComapany\": \"UATAICI\",\r\n            \"Claim\": {\r\n                \"PolicyNumber\": \"POPM2W00100043459\",\r\n                \"RegistrationNumber\": \"MH 04 HQ 8035\",\r\n                \"ContactName\": \"LEENA DILIP ACHAREKAR\",\r\n                \"ClaimServicingbranch\": \"Mumbai\",\r\n                \"ContactNumber\": \"9000000000\",\r\n                \"emailID\": \"GAUTHAM@GMAIL.COM\",\r\n                \"AccidentDateandtime\": \"14/01/2025 04:39\",\r\n                \"AccidentCity\": \"Kozhikode\",\r\n                \"VehicleInspectionAddress\": \",Kozhikode,Kerala\",\r\n                \"CityName\": \"Kozhikode\",\r\n                \"StateName\": \"Kerala\",\r\n                \"InspectionSpotLocation\": \"\",\r\n                \"Garage\": \"Not\",\r\n                \"DriverName\": \"\",\r\n                \"isInsured\": \"Y\",\r\n                \"ClaimIntimatedBy\": \"Insured\",\r\n                \"CauseOfLoss\": \"Hit by another vehicle whilst parked\",\r\n                \"Others\": \"other\",\r\n                \"EstimatedClaimAmount\": \"0\"\r\n            }\r\n        }\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://devapi.sbigeneral.in/customers/v1/chatbot/claimintimation",
-					"protocol": "https",
-					"host": [
-						"devapi",
-						"sbigeneral",
-						"in"
-					],
-					"path": [
-						"customers",
-						"v1",
-						"chatbot",
-						"claimintimation"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "https://devapi.sbigeneral.in/customers/v1/chatbot/claimintimation",
 			"request": {
 				"method": "POST",
@@ -235,7 +184,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0NThiODE3Nzk1YmFkNDgwYzVjNTllNmM0MjRmZDI4NSIsImF1ZCI6IjUxZDlhZTkyNzkzODJhNGZhNmYxYmVjZDRjNDFjYTg0IiwiZXhwIjoxNzM3MDkzOTU2LCJpYXQiOjE3MzcwOTM3NzZ9.7PPQk8gB2tUBHGbBK9kGub8ui1MTYdu8T3gHaMh0vtI"
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0NThiODE3Nzk1YmFkNDgwYzVjNTllNmM0MjRmZDI4NSIsImF1ZCI6IjUxZDlhZTkyNzkzODJhNGZhNmYxYmVjZDRjNDFjYTg0IiwiZXhwIjoxNzM3NDUwOTY1LCJpYXQiOjE3Mzc0NTA3ODV9.teM6znDESaNUEwxE_gIAkQRWMphk50GPcXHw90F-7R4"
 					},
 					{
 						"key": "Content-Type",
@@ -244,7 +193,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"RequestHeader\": {\r\n        \"requestID\": \"123456\",\r\n        \"action\": \"claimIntimation\",\r\n        \"channel\": \"SBIG\",\r\n        \"transactionTimestamp\": \"14-Jan-2025-16:41:23\"\r\n    },\r\n    \"RequestBody\": {\r\n        \"Claims\": {\r\n            \"ServiceType\": \"Intimation\",\r\n            \"TieUpClaimId\": 7368530837,\r\n            \"UserId\": \"20063258\",\r\n            \"InsuranceComapany\": \"UATAICI\",\r\n            \"Claim\": {\r\n                \"PolicyNumber\": \"POPM2W00100043459\",\r\n                \"RegistrationNumber\": \"MH 04 HQ 8035\",\r\n                \"ContactName\": \"LEENA DILIP ACHAREKAR\",\r\n                \"ClaimServicingbranch\": \"Mumbai\",\r\n                \"ContactNumber\": \"9000000000\",\r\n                \"emailID\": \"GAUTHAM@GMAIL.COM\",\r\n                \"AccidentDateandtime\": \"14/01/2025 04:39\",\r\n                \"AccidentCity\": \"Kozhikode\",\r\n                \"VehicleInspectionAddress\": \",Kozhikode,Kerala\",\r\n                \"CityName\": \"Kozhikode\",\r\n                \"StateName\": \"Kerala\",\r\n                \"InspectionSpotLocation\": \"\",\r\n                \"Garage\": \"Not\",\r\n                \"DriverName\": \"\",\r\n                \"isInsured\": \"Y\",\r\n                \"ClaimIntimatedBy\": \"Insured\",\r\n                \"CauseOfLoss\": \"Hit by another vehicle whilst parked\",\r\n                \"Others\": \"other\",\r\n                \"EstimatedClaimAmount\": \"0\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"raw": "{\r\n    \"RequestHeader\": {\r\n        \"requestID\": \"123456\",\r\n        \"action\": \"claimIntimation\",\r\n        \"channel\": \"SBIG\",\r\n        \"transactionTimestamp\": \"14-Jan-2025-16:41:23\"\r\n    },\r\n    \"RequestBody\": {\r\n        \"Claims\": {\r\n            \"ServiceType\": \"Intimation\",\r\n            \"TieUpClaimId\": null,\r\n            \"UserId\": \"20063258\",\r\n            \"InsuranceComapany\": \"UATAICI\",\r\n            \"Claim\": {\r\n                \"PolicyNumber\": \"POPM2W0010004345\",\r\n                \"RegistrationNumber\": \"MH 04 HQ 8035\",\r\n                \"ContactName\": \"LEENA DILIP ACHAREKAR\",\r\n                \"ClaimServicingbranch\": \"Mumbai\",\r\n                \"ContactNumber\": \"9000000000\",\r\n                \"emailID\": \"GAUTHAM@GMAIL.COM\",\r\n                \"AccidentDateandtime\": \"14/01/2025 04:39:00\",\r\n                \"AccidentCity\": \"Kozhikode\",\r\n                \"VehicleInspectionAddress\": \",Kozhikode,Kerala\",\r\n                \"CityName\": \"Kozhikode\",\r\n                \"StateName\": \"Kerala\",\r\n                \"InspectionSpotLocation\": \"\",\r\n                \"Garage\": \"Not\",\r\n                \"DriverName\": \"\",\r\n                \"isInsured\": \"Y\",\r\n                \"ClaimIntimatedBy\": \"Insured\",\r\n                \"CauseOfLoss\": \"Hit by another vehicle whilst parked\",\r\n                \"Others\": \"Testing \",\r\n                \"EstimatedClaimAmount\": \"50000\"\r\n            }\r\n        }\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -303,7 +252,10 @@
 			"response": []
 		},
 		{
-			"name": "https://ansappsuat.sbigen.in/Intimation/intimateMotorClaim",
+			"name": "Intimation/intimateMotorClaim",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -320,7 +272,39 @@
 					}
 				},
 				"url": {
-					"raw": "https://ansappsuat.sbigen.in/Intimation/intimateMotorClaim",
+					"raw": "http://localhost:7002/Intimation/intimateMotorClaim",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7002",
+					"path": [
+						"Intimation",
+						"intimateMotorClaim"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getIntimationPolicyDetails",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "0000000000381007",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ansappsuat.sbigen.in/Intimation/getIntimationPolicyDetails",
 					"protocol": "https",
 					"host": [
 						"ansappsuat",
@@ -329,7 +313,7 @@
 					],
 					"path": [
 						"Intimation",
-						"intimateMotorClaim"
+						"getIntimationPolicyDetails"
 					]
 				}
 			},

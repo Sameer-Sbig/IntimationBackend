@@ -159,6 +159,7 @@ public class ApiServiceImpl implements ApiService {
 					info.setDrivingLicenseNo(rs.getString("DRIVINGLICENSENO"));
 					info.setEngineNo(rs.getString("ENGINENO"));
 					info.setChasisNo(rs.getString("CHASISNO"));
+					info.setLob(rs.getString("LOB"));;
 					
 					
 					results.add(info);
