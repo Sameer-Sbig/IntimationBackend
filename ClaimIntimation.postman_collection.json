@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "ICIntimation",
+			"name": "OemLink",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
 					"accept-encoding": true,
@@ -97,73 +97,6 @@
 					"path": [
 						"v1",
 						"tokens"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "healthClaimIntimationMotoveyss",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{   \r\n    \"Claims\": {\r\n        \"Claim\": {\r\n            \"PolicyNumber\": \"0000000000356989\",\r\n            \"RegistrationNumber\": \"MH-04-AU-1238\",\r\n            \"InsuredName\": \"John Doe\", \r\n            \"ClaimServicingBranch\": \"SBI123\",\r\n            \"MobileNumber\": \"1234567890\",\r\n            \"InsuredEmailId\": \"johndoe@example.com\",\r\n            \"AccidentDateTime\": \"20/01/2024 14:30:00\",\r\n            \"LossState\": \"Maharashtra\",\r\n            \"LossCity\": \"Mumbai\",\r\n            \"DriverName\": \"John Doe\",\r\n            \"LossDescription\": \"Car accident\",\r\n            \"NatureOfLoss\": \"Motor OD\", \r\n            \"SurveyPlaceOrGarageNameAddress\": \"ABC Garage, XYZ Street\",\r\n            \"WorkshopId\": \"DEAL123\",\r\n            \"DrivingLicenseNumber\": \"DL1234567890\",\r\n            \"EstimatedClaimAmount\": \"5000.00\",\r\n            \"ModeOfIntimation\": \"Email\"\r\n        },\r\n        \"InsuranceComapany\": \"SBIGCL\",\r\n        \"ServiceType\": \"Intimation\",\r\n        \"TieUpClaimId\": \"IC1523567\",\r\n        \"UserId\": \"20063258\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:7002/Intimation/motorClaimIntimationMotoveyss",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7002",
-					"path": [
-						"Intimation",
-						"motorClaimIntimationMotoveyss"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "\thttp://172.18.115.105:7003/Intimation/motorClaimIntimationMotoveyss",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{   \r\n    \"Claims\": {\r\n        \"Claim\": {\r\n            \"PolicyNumber\": \"0000000000356989\",\r\n            \"RegistrationNumber\": \"MH-04-AU-1238\",\r\n            \"InsuredName\": \"John Doe\", \r\n            \"ClaimServicingBranch\": \"SBI123\",\r\n            \"MobileNumber\": \"1234567890\",\r\n            \"InsuredEmailId\": \"johndoe@example.com\",\r\n            \"AccidentDateTime\": \"20/01/2024 14:30:00\",\r\n            \"LossState\": \"Maharashtra\",\r\n            \"LossCity\": \"Mumbai\",\r\n            \"DriverName\": \"John Doe\",\r\n            \"LossDescription\": \"Car accident\",\r\n            \"NatureOfLoss\": \"Motor OD\", \r\n            \"SurveyPlaceOrGarageNameAddress\": \"ABC Garage, XYZ Street\",\r\n            \"WorkshopId\": \"DEAL123\",\r\n            \"DrivingLicenseNumber\": \"DL1234567890\",\r\n            \"EstimatedClaimAmount\": \"5000.00\",\r\n            \"ModeOfIntimation\": \"Email\"\r\n        },\r\n        \"InsuranceComapany\": \"SBIGCL\",\r\n        \"ServiceType\": \"Intimation\",\r\n        \"TieUpClaimId\": \"IC1523567\",\r\n        \"UserId\": \"20063258\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://172.18.115.105:7003/Intimation/motorClaimIntimationMotoveyss",
-					"protocol": "http",
-					"host": [
-						"172",
-						"18",
-						"115",
-						"105"
-					],
-					"port": "7003",
-					"path": [
-						"Intimation",
-						"motorClaimIntimationMotoveyss"
 					]
 				}
 			},
@@ -264,7 +197,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"RequestHeader\": {\r\n        \"requestID\": \"123456\",\r\n        \"action\": \"claimIntimation\",\r\n        \"channel\": \"SBIG\",\r\n        \"transactionTimestamp\": \"14-Jan-2025-16:41:23\"\r\n    },\r\n    \"RequestBody\": {\r\n        \"Claims\": {\r\n            \"ServiceType\": \"Intimation\",\r\n            \"TieUpClaimId\": null,\r\n            \"UserId\": \"20063258\",\r\n            \"InsuranceComapany\": \"UATAICI\",\r\n            \"Claim\": {\r\n                \"PolicyNumber\": \"POPM2W0010004345\",\r\n                \"RegistrationNumber\": \"MH 04 HQ 8035\",\r\n                \"ContactName\": \"LEENA DILIP ACHAREKAR\",\r\n                \"ClaimServicingbranch\": \"Mumbai\",\r\n                \"ContactNumber\": \"9000000000\",\r\n                \"emailID\": \"GAUTHAM@GMAIL.COM\",\r\n                \"AccidentDateandtime\": \"14/01/2025 04:39:00\",\r\n                \"AccidentCity\": \"Kozhikode\",\r\n                \"VehicleInspectionAddress\": \",Kozhikode,Kerala\",\r\n                \"CityName\": \"Kozhikode\",\r\n                \"StateName\": \"Kerala\",\r\n                \"InspectionSpotLocation\": \"\",\r\n                \"Garage\": \"Not\",\r\n                \"DriverName\": \"\",\r\n                \"isInsured\": \"Y\",\r\n                \"ClaimIntimatedBy\": \"Insured\",\r\n                \"CauseOfLoss\": \"Hit by another vehicle whilst parked\",\r\n                \"Others\": \"other\",\r\n                \"EstimatedClaimAmount\": \"50000\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"raw": "{\r\n    \"RequestHeader\": {\r\n        \"requestID\": \"123456\",\r\n        \"action\": \"claimIntimation\",\r\n        \"channel\": \"SBIG\",\r\n        \"transactionTimestamp\": \"20-Jan-2025-16:41:23\"\r\n    },\r\n    \"RequestBody\": {\r\n        \"Claims\": {\r\n            \"ServiceType\": \"Intimation\",\r\n            \"TieUpClaimId\": null,\r\n            \"InsuranceCompany\": \"UATAICI\",\r\n            \"Claim\": {\r\n                \"PolicyNumber\": \"0000000000381007\",\r\n                \"RegistrationNumber\": \"MH 05 AX 3353\",\r\n                \"ContactName\": \"Sushant Reddy\",\r\n                \"ClaimServicingbranch\": \"Mumbai\",\r\n                \"ContactNumber\": \"+91-9145153399\",\r\n                \"emailID\": \"omireddy.aqm@gmail.com\",\r\n                \"AccidentDateandtime\": \"20/01/2025 16:54:00\",\r\n                \"AccidentCity\": \"Thane\",\r\n                \"VehicleInspectionAddress\": \"Jha Automobiles\",\r\n                \"CityName\": \"Thane\",\r\n                \"StateName\": \"Maharashtra\",\r\n                \"InspectionSpotLocation\": \"Thane\",\r\n                \"Garage\": \"Jha Automobiles\",\r\n                \"DriverName\": \"JJ\",\r\n                \"isInsured\": \"Y\",\r\n                \"ClaimIntimatedBy\": \"Insured\",\r\n                \"CauseOfLoss\": \"In parking\",\r\n                \"Others\": \"Testing\",\r\n                \"EstimatedClaimAmount\": \"70000\"\r\n            }\r\n        }\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -272,12 +205,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:7002/Intimation/intimateMotorClaim",
-					"protocol": "http",
+					"raw": "https://ansappsuat.sbigen.in/Intimation/intimateMotorClaim",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"ansappsuat",
+						"sbigen",
+						"in"
 					],
-					"port": "7002",
 					"path": [
 						"Intimation",
 						"intimateMotorClaim"

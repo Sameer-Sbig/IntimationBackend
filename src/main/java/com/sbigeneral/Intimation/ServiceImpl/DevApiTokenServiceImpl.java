@@ -22,7 +22,8 @@ import org.springframework.http.HttpEntity;
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("X-IBM-Client-Id", "458b817795bad480c5c59e6c424fd285");
 			headers.set("X-IBM-Client-Secret","51d9ae9279382a4fa6f1becd4c41ca84");
-		    final String apiUrl ="https://devapi.sbigeneral.in/v1/tokens"; 
+//		    final String apiUrl ="https://devapi.sbigeneral.in/v1/tokens"; 
+			final String apiUrl = "http://devapiintra.sbigen.in:8443/v1/tokens";
 		    HttpEntity<String> entity = new HttpEntity<String>(headers);
 		    Class<Map<String,String>> responseType = (Class<Map<String,String>>) (Class<?>) Map.class;
 		    

@@ -47,6 +47,8 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 		logger.info("The token is " + token.getBody());
 		
 		String apiUrl = "https://devapi.sbigeneral.in/customers/v1/chatbot/claimintimation";
+//		String apiUrl1 ="https://devapiintrasec.sbigen.in:9443/customers/v1/chatbot/claimintimation";
+		String apiUrl1 = "http://devapiintra.sbigen.in:8443/customers/v1/chatbot/claimintimation";
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("X-IBM-Client-Id", "458b817795bad480c5c59e6c424fd285");
 		headers.set("X-IBM-Client-Secret", "51d9ae9279382a4fa6f1becd4c41ca84");
@@ -57,7 +59,7 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 		Map<String,String> responseData = new HashMap<String, String>();
 		
 		try {
-			ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity,
+			ResponseEntity<String> response = restTemplate.exchange(apiUrl1, HttpMethod.POST, entity,
 					String.class);
 			System.out.println(response);
 			logger.info("The response is " + response);
