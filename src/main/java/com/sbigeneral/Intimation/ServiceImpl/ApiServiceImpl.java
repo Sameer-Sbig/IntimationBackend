@@ -22,6 +22,7 @@ import org.springframework.util.*;
 import org.springframework.web.client.RestTemplate;
 
 import com.sbigeneral.Intimation.Controller.getPolicyInfoController;
+import com.sbigeneral.Intimation.Entity.HealthPolicyMembers;
 import com.sbigeneral.Intimation.Entity.PolicyDetails;
 import com.sbigeneral.Intimation.Service.ApiService;
 import com.sbigeneral.Intimation.model.SecurePolicyInfo;
@@ -136,7 +137,7 @@ public class ApiServiceImpl implements ApiService {
 	@Override
 	public ResponseEntity<?> getPolicyDetails(String policyNumber) {
 		// TODO Auto-generated method stub
-		List<PolicyDetails> results = new ArrayList<>();
+		List<Object> results = new ArrayList<>();
 		
 		String sql = "SELECT * FROM PolicyDetails WHERE POLICYNO = ?";
 		try (Connection conn = dataSource.getConnection();
@@ -163,6 +164,33 @@ public class ApiServiceImpl implements ApiService {
 					
 					
 					results.add(info);
+				}
+				
+				String sql2 = "SELECT * FROM HEALTHPOLICY_MEMBERS WHERE POLICYNO = ?";
+				try (Connection conn2 = dataSource.getConnection();
+				         PreparedStatement ps2 = conn.prepareStatement(sql2)) {
+					ps2.setString(1, policyNumber);
+					try(ResultSet rs2 = ps2.executeQuery()) {
+						List<HealthPolicyMembers> members = new ArrayList<HealthPolicyMembers>();
+						while(rs2.next()) {
+							HealthPolicyMembers member = new HealthPolicyMembers();
+							member.setMemberId(rs2.getLong("MEMBERID"));
+							member.setName(rs2.getString("NAME"));
+							member.setPolicyNo(rs2.getString("POLICYNO"));
+							
+							members.add(member);
+						}
+						
+						results.add(members);
+					} catch (Exception e) {
+						e.printStackTrace();
+						logger.info("Error in fetching member details");
+						return new ResponseEntity<>("Error in fetching member details against this policy no." , HttpStatus.BAD_GATEWAY);
+					}
+					
+				} catch (Exception e) {
+					logger.info("Could not establish database connection");
+					return new ResponseEntity<>("Could not establish database connection" , HttpStatus.BAD_GATEWAY);
 				}
 				
 			} catch (Exception e) {

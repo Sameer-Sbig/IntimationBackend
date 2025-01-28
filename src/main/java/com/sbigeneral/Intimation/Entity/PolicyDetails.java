@@ -1,10 +1,14 @@
 package com.sbigeneral.Intimation.Entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.transaction.annotation.Transactional;
 
 @Table(name="POLICYDETAILS")
 public class PolicyDetails {
@@ -54,6 +58,7 @@ public class PolicyDetails {
 	
 	@Column(name="LOB")
 	private String lob;
+	
 
 	public int getId() {
 		return Id;

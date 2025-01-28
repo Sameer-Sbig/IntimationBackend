@@ -1,15 +1,22 @@
 package com.sbigeneral.Intimation.Controller;
 
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
+import com.sbigeneral.Intimation.Repository.HealthClaimIntimationRepo;
+import com.sbigeneral.Intimation.Service.Decrypt;
+import com.sbigeneral.Intimation.Service.Encrypt;
 import com.sbigeneral.Intimation.Service.HealthClaimIntimationService;
 import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;
 import com.sbigeneral.Intimation.model.ClaimsWrapper;
@@ -24,18 +31,20 @@ public class claimIntimationController {
 
 	@Autowired
 	private HealthClaimIntimationService healthClaimService;
+	
+	@Autowired
+	private Decrypt decrypt;
+	
+	@Autowired
+	private Encrypt encrypt;
+	
+	@Autowired
+	private HealthClaimIntimationRepo healthClaimIntimationRepo;
 
 	@Autowired
 	private MotorIntimationDevApi motorClaimServiceDevApi;
 	private static final Logger logger = LogManager.getLogger(claimIntimationController.class);
 
-	@PostMapping("/healthClaimIntimation")
-	public ResponseEntity<?> saveHealthClaimIntimation(@RequestBody HealthClaimIntimation obj) {
-		return healthClaimService.saveHealthClaim(obj);
-	}
-
-
-	
 	@PostMapping("/intimateMotorClaim")
 	public ResponseEntity<?> intimateMotorClaim(@RequestBody ClaimsWrapper obj){
 		System.out.println(obj);	
@@ -43,6 +52,58 @@ public class claimIntimationController {
 		return motorClaimServiceDevApi.IntimateChatBotService(obj);
 	}
 	
+	@PostMapping("/healthClaimIntimation")
+	public ResponseEntity<?> saveHealthClaimIntimation(@RequestBody HealthClaimIntimation obj) {
+		try {
+			System.out.println("Object : "+obj);
+			ResponseEntity<Map<String,Object>> saveDevApiHealthClaimReponse = healthClaimService.saveDevApiHealthClaim(obj);
+			
+			String decryptedData = decrypt.aes256cbcDecrypt((String) saveDevApiHealthClaimReponse.getBody().get("EncryptedResponse"));
+			
+			JSONObject jsonObject = new JSONObject(decryptedData);
+			if(saveDevApiHealthClaimReponse.getBody().get("IsSuccess").equals(true)) {
+				obj.setIntimationNo(jsonObject.getString("intimationNo"));
+				healthClaimIntimationRepo.save(obj);
+				System.out.println("intimation details save in db");
+				return new ResponseEntity<String>(decryptedData,HttpStatus.OK);
+			} else { 
+				if(jsonObject.get("ErrorMessage") == null) {
+					return new ResponseEntity<String>(decryptedData,HttpStatus.BAD_REQUEST);
+				} else {
+					return new ResponseEntity<String>(decryptedData,HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/encryptAES-256-CBC")
+	public ResponseEntity<String> encrypt(@RequestBody Object obj) {
+		try {
+			String encryptedData = encrypt.aes256cbcEncrypt(obj);
+			return new ResponseEntity<String>(encryptedData , HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/decryptAES-256-CBC")
+	public ResponseEntity<String> decrypt(@RequestBody String encryptedData) {
+		try {
+			String decryptedData = decrypt.aes256cbcDecrypt(encryptedData);
+			
+			return new ResponseEntity<String>(decryptedData , HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 
 }

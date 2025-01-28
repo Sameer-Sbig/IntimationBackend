@@ -1,5 +1,7 @@
 package com.sbigeneral.Intimation.Service;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -9,4 +11,7 @@ import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 public interface HealthClaimIntimationService {
 	
 	public ResponseEntity<?> saveHealthClaim(HealthClaimIntimation obj);
+	
+	public ResponseEntity<Map<String,Object>> saveDevApiHealthClaim(HealthClaimIntimation obj);
+	
 }

@@ -18,38 +18,38 @@ public class HealthClaimIntimation {
 	@Column(name = "ID")
 	private int id;
 	
-	@Column(name = "ACCESS_TOKEN")
-	private String accessToken;
+	@Column(name = "INTIMATIONNUMBER")
+	private String intimationNo;
 	
 	@Column(name = "MEMBERID")
 	private String memeberId;
 	
-	@Column(name = "PATIENTNAME")
-	private String patientName;
+	@Column(name = "CUSTOMERNAME")
+	private String customerName;
 	
 	@Column(name = "POLICYNO")
-	private String policyNo;
+	private String policyNumber;
 	
 	@Column(name = "CONTACTNO")
-	private int contactNo;
+	private String customerMobileNo;
 	
 	@Column(name = "EMAILADDRESS")
-	private String emailAddress;
+	private String customerEmailId;
 	
-	@Column(name = "DATEOFADMISSION")
-	private Date dateOfAdmission;
+	@Column(name = "DATEOFADMISSSION")
+	private String dateOfAdmission;
 	
 	@Column(name = "HOSPITALNAME")
 	private String hospitalName;
 	
 	@Column(name = "REASONFORHOSPITALISATION")
-	private String reasonForHospitalisation;
+	private String admissionReason;
 	
 	@Column(name = "DOCTORNAME")
 	private String doctorName;
 	
 	@Column(name = "ESTIMATEDAMOUNT")
-	private int estimatedAmount;
+	private int claimAmount;
 	
 	@Column(name = "ROOMTYPE")
 	private String roomType;
@@ -64,10 +64,10 @@ public class HealthClaimIntimation {
 	private String remark;
 	
 	@Column(name = "CASEOFACCIDENT")
-	private String caseOfAccident;
+	private String isAccidentCase;
 	
 	@Column(name = "FIRNO")
-	private String firNo;
+	private String FIRNo;
 	
 	@Column(name = "HOSPITALSTATE")
 	private String hospitalState;
@@ -78,20 +78,21 @@ public class HealthClaimIntimation {
 	@Column(name = "HOSPITALPINCODE")
 	private String hospitalPinCode;
 
+	@Column(name = "ALTERNATECONTACTNO")
+	private String customerAlternateMobileNo;
+	
+	@Column(name = "ALTERNATEEMAILADDRESS")
+	private String customerAlternateEmailId;
+	
+	@Column(name = "PATIENTNAME")
+	private String patientName;
+
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getAccessToken() {
-		return accessToken;
-	}
-
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
 	}
 
 	public String getMemeberId() {
@@ -102,43 +103,43 @@ public class HealthClaimIntimation {
 		this.memeberId = memeberId;
 	}
 
-	public String getPatientName() {
-		return patientName;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setPatientName(String patientName) {
-		this.patientName = patientName;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
-	public String getPolicyNo() {
-		return policyNo;
+	public String getPolicyNumber() {
+		return policyNumber;
 	}
 
-	public void setPolicyNo(String policyNo) {
-		this.policyNo = policyNo;
+	public void setPolicyNumber(String policyNumber) {
+		this.policyNumber = policyNumber;
 	}
 
-	public int getContactNo() {
-		return contactNo;
+	public String getCustomerMobileNo() {
+		return customerMobileNo;
 	}
 
-	public void setContactNo(int contactNo) {
-		this.contactNo = contactNo;
+	public void setCustomerMobileNo(String customerMobileNo) {
+		this.customerMobileNo = customerMobileNo;
 	}
 
-	public String getEmailAddress() {
-		return emailAddress;
+	public String getCustomerEmailId() {
+		return customerEmailId;
 	}
 
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+	public void setCustomerEmailId(String customerEmailId) {
+		this.customerEmailId = customerEmailId;
 	}
 
-	public Date getDateOfAdmission() {
+	public String getDateOfAdmission() {
 		return dateOfAdmission;
 	}
 
-	public void setDateOfAdmission(Date dateOfAdmission) {
+	public void setDateOfAdmission(String dateOfAdmission) {
 		this.dateOfAdmission = dateOfAdmission;
 	}
 
@@ -150,12 +151,12 @@ public class HealthClaimIntimation {
 		this.hospitalName = hospitalName;
 	}
 
-	public String getReasonForHospitalisation() {
-		return reasonForHospitalisation;
+	public String getAdmissionReason() {
+		return admissionReason;
 	}
 
-	public void setReasonForHospitalisation(String reasonForHospitalisation) {
-		this.reasonForHospitalisation = reasonForHospitalisation;
+	public void setAdmissionReason(String admissionReason) {
+		this.admissionReason = admissionReason;
 	}
 
 	public String getDoctorName() {
@@ -166,12 +167,12 @@ public class HealthClaimIntimation {
 		this.doctorName = doctorName;
 	}
 
-	public int getEstimatedAmount() {
-		return estimatedAmount;
+	public int getClaimAmount() {
+		return claimAmount;
 	}
 
-	public void setEstimatedAmount(int estimatedAmount) {
-		this.estimatedAmount = estimatedAmount;
+	public void setClaimAmount(int claimAmount) {
+		this.claimAmount = claimAmount;
 	}
 
 	public String getRoomType() {
@@ -206,20 +207,20 @@ public class HealthClaimIntimation {
 		this.remark = remark;
 	}
 
-	public String getCaseOfAccident() {
-		return caseOfAccident;
+	public String getIsAccidentCase() {
+		return isAccidentCase;
 	}
 
-	public void setCaseOfAccident(String caseOfAccident) {
-		this.caseOfAccident = caseOfAccident;
+	public void setIsAccidentCase(String isAccidentCase) {
+		this.isAccidentCase = isAccidentCase;
 	}
 
-	public String getFirNo() {
-		return firNo;
+	public String getFIRNo() {
+		return FIRNo;
 	}
 
-	public void setFirNo(String firNo) {
-		this.firNo = firNo;
+	public void setFIRNo(String fIRNo) {
+		FIRNo = fIRNo;
 	}
 
 	public String getHospitalState() {
@@ -246,20 +247,57 @@ public class HealthClaimIntimation {
 		this.hospitalPinCode = hospitalPinCode;
 	}
 
+	public String getCustomerAlternateMobileNo() {
+		return customerAlternateMobileNo;
+	}
+
+	public void setCustomerAlternateMobileNo(String customerAlternateMobileNo) {
+		this.customerAlternateMobileNo = customerAlternateMobileNo;
+	}
+
+	public String getCustomerAlternateEmailId() {
+		return customerAlternateEmailId;
+	}
+
+	public void setCustomerAlternateEmailId(String customerAlternateEmailId) {
+		this.customerAlternateEmailId = customerAlternateEmailId;
+	}
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
+	}
+
+	public String getIntimationNo() {
+		return intimationNo;
+	}
+
+	public void setIntimationNo(String intimationNo) {
+		this.intimationNo = intimationNo;
+	}
+
 	@Override
 	public String toString() {
-		return "HealthClaimIntimation [id=" + id + ", accessToken=" + accessToken + ", memeberId=" + memeberId
-				+ ", patientName=" + patientName + ", policyNo=" + policyNo + ", contactNo=" + contactNo
-				+ ", emailAddress=" + emailAddress + ", dateOfAdmission=" + dateOfAdmission + ", hospitalName="
-				+ hospitalName + ", reasonForHospitalisation=" + reasonForHospitalisation + ", doctorName=" + doctorName
-				+ ", estimatedAmount=" + estimatedAmount + ", roomType=" + roomType + ", claimType=" + claimType
-				+ ", dateOfDischarge=" + dateOfDischarge + ", remark=" + remark + ", caseOfAccident=" + caseOfAccident
-				+ ", firNo=" + firNo + ", hospitalState=" + hospitalState + ", hospitalCity=" + hospitalCity
-				+ ", hospitalPinCode=" + hospitalPinCode + "]";
+		return "HealthClaimIntimation [id=" + id + ", intimationNo=" + intimationNo + ", memeberId=" + memeberId
+				+ ", customerName=" + customerName + ", policyNumber=" + policyNumber + ", customerMobileNo="
+				+ customerMobileNo + ", customerEmailId=" + customerEmailId + ", dateOfAdmission=" + dateOfAdmission
+				+ ", hospitalName=" + hospitalName + ", admissionReason=" + admissionReason + ", doctorName="
+				+ doctorName + ", claimAmount=" + claimAmount + ", roomType=" + roomType + ", claimType=" + claimType
+				+ ", dateOfDischarge=" + dateOfDischarge + ", remark=" + remark + ", isAccidentCase=" + isAccidentCase
+				+ ", FIRNo=" + FIRNo + ", hospitalState=" + hospitalState + ", hospitalCity=" + hospitalCity
+				+ ", hospitalPinCode=" + hospitalPinCode + ", customerAlternateMobileNo=" + customerAlternateMobileNo
+				+ ", customerAlternateEmailId=" + customerAlternateEmailId + ", patientName=" + patientName + "]";
 	}
+
 	
 
-		
+	
+	
+
+	
 	
 	
 	
