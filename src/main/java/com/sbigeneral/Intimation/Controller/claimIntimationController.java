@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
+
 import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 import com.sbigeneral.Intimation.Repository.HealthClaimIntimationRepo;
 import com.sbigeneral.Intimation.Service.Decrypt;
@@ -57,12 +59,14 @@ public class claimIntimationController {
 		try {
 			System.out.println("Object : "+obj);
 			ResponseEntity<Map<String,Object>> saveDevApiHealthClaimReponse = healthClaimService.saveDevApiHealthClaim(obj);
-			
+			logger.info("saveDev Api health claim response : "+saveDevApiHealthClaimReponse);
 			String decryptedData = decrypt.aes256cbcDecrypt((String) saveDevApiHealthClaimReponse.getBody().get("EncryptedResponse"));
+			logger.info("Decrypted responce : "+decryptedData);
+			System.out.println("Decrypted Response : "+decryptedData);
 			
 			JSONObject jsonObject = new JSONObject(decryptedData);
 			if(saveDevApiHealthClaimReponse.getBody().get("IsSuccess").equals(true)) {
-				obj.setIntimationNo(jsonObject.getString("intimationNo"));
+				obj.setIntimationNo(jsonObject.getString("IntimationNo"));
 				healthClaimIntimationRepo.save(obj);
 				System.out.println("intimation details save in db");
 				return new ResponseEntity<String>(decryptedData,HttpStatus.OK);
@@ -74,9 +78,14 @@ public class claimIntimationController {
 				}
 			}
 			
-		} catch (Exception e) {
+		} catch(HttpClientErrorException e) {
+			logger.info("Error in controller HttpClient : "+e);
 			e.printStackTrace();
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(e.getMessage(),e.getStatusCode());
+		} catch (Exception e) {
+			logger.info("Error in controller : "+e);
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

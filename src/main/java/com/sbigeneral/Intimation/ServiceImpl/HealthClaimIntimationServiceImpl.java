@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,8 +14,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import com.sbigeneral.Intimation.Controller.claimIntimationController;
 import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 import com.sbigeneral.Intimation.Repository.HealthClaimIntimationRepo;
 import com.sbigeneral.Intimation.Service.Decrypt;
@@ -39,6 +43,8 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 	
 	@Autowired
 	private DevApiTokenService devApiTokenService;
+	
+	private static final Logger logger = LogManager.getLogger(claimIntimationController.class);
 
 	@Override
 	public ResponseEntity<?> saveHealthClaim(HealthClaimIntimation obj) {
@@ -112,27 +118,37 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 			headers.set("X-IBM-Client-Id", "458b817795bad480c5c59e6c424fd285");
 			headers.set("X-IBM-Client-Secret","51d9ae9279382a4fa6f1becd4c41ca84");
 			headers.set("Authorization",devApiToken.getBody().get("accessToken"));
-			final String apiUrl ="https://devapi.sbigeneral.in/ept/intimateClaim";
+//			final String apiUrl ="https://devapi.sbigeneral.in/ept/intimateClaim";
+//			final String apiUrl = "https://devapiintrasec.sbigen.in:9443/ept/intimateClaim";
+			final String apiUrl = "http://devapiintra.sbigen.in:8443/ept/intimateClaim";
 			HttpEntity<Map<String,String>> entity = new HttpEntity<Map<String,String>>(encryptedPayload,headers);
 			Class<Map<String,Object>> responseType = (Class<Map<String,Object>>) (Class<?>) Map.class;
 			RestTemplate restTemplate = new RestTemplate();
 			
 			try {
 				ResponseEntity<Map<String,Object>> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity , responseType);
+				logger.info("Response got from health intimation : "+response);
 		    	return (ResponseEntity<Map<String, Object>>) new ResponseEntity<>(response.getBody(),HttpStatus.OK);
 				
-			} catch (Exception e) {
+			} catch (HttpClientErrorException e) {
 				e.printStackTrace();
+				logger.info("Error in health intimation : "+e);
+				logger.info("Status code : "+e.getStatusCode());
 				Map<String,Object> error = new HashMap<String, Object>();
 				error.put("error", e.getMessage());
-				return new ResponseEntity<>(error,HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<>(error,e.getStatusCode());
+			} catch(Exception e) {
+				Map<String, Object> errorMap = new HashMap<String, Object>();
+				logger.info("Error in fetching Devapi Token : "+e);
+				return new ResponseEntity<>(errorMap,HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			
-		} catch (Exception e) {
-		
-			e.printStackTrace();
+		} catch(Exception e) {
+			Map<String, Object> errorMap = new HashMap<String, Object>();
+			logger.info("Error in fetching Devapi Token : "+e);
+			return new ResponseEntity<>(errorMap,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return null;
+
 
 	}
 	

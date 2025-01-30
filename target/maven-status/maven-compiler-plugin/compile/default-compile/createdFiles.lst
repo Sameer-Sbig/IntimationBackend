@@ -5,6 +5,7 @@ com\sbigeneral\Intimation\Controller\claimIntimationController.class
 com\sbigeneral\Intimation\Exception\AccountLockedException.class
 com\sbigeneral\Intimation\model\Claim.class
 com\sbigeneral\Intimation\ServletInitializer.class
+com\sbigeneral\Intimation\Entity\HealthPolicyMembers.class
 com\sbigeneral\Intimation\model\SecurePolicyInfo.class
 com\sbigeneral\Intimation\Entity\MotorIntimation.class
 com\sbigeneral\Intimation\model\Claims.class
@@ -17,6 +18,7 @@ com\sbigeneral\Intimation\model\ClaimsWrapper.class
 com\sbigeneral\Intimation\ServiceImpl\EncryptImpl.class
 com\sbigeneral\Intimation\model\RequestHeader.class
 com\sbigeneral\Intimation\ServiceImpl\HealthClaimIntimationServiceImpl.class
+com\sbigeneral\Intimation\ServiceImpl\DevApiTokenServiceImpl$1.class
 com\sbigeneral\Intimation\Intimation.class
 com\sbigeneral\Intimation\config\WebLogicConfig.class
 com\sbigeneral\Intimation\Service\ApiService.class
