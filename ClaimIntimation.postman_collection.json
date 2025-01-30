@@ -252,6 +252,38 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "New getIntimationPolicyDetails",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "0000000000381196",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7002/Intimation/getIntimationPolicyDetails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7002",
+					"path": [
+						"Intimation",
+						"getIntimationPolicyDetails"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
