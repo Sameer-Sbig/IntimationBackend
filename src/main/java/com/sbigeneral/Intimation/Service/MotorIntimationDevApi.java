@@ -1,8 +1,11 @@
 package com.sbigeneral.Intimation.Service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.sbigeneral.Intimation.Entity.MotorClaimIntimation;
 import com.sbigeneral.Intimation.model.Claims;
 import com.sbigeneral.Intimation.model.ClaimsWrapper;
 import com.sbigeneral.Intimation.model.RequestBody;
@@ -11,5 +14,7 @@ import com.sbigeneral.Intimation.model.RequestBody;
 public interface MotorIntimationDevApi {
 //	public ResponseEntity<?> IntimateDevApiService(RequestBody obj);
 	public ResponseEntity<?> IntimateChatBotService(ClaimsWrapper obj);
+	
+	public List<MotorClaimIntimation> getMotorIntimationPolicies();
 
 }

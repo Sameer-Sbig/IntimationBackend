@@ -3,6 +3,7 @@ package com.sbigeneral.Intimation.ServiceImpl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -150,6 +151,18 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 		}
 
 
+	}
+
+	@Override
+	public List<HealthClaimIntimation> getHealthIntimationPolicies() {
+		try {
+			List<HealthClaimIntimation> healthIntimationPolicies = healthClaimRepo.getHealthIntimationData();
+			return healthIntimationPolicies;	
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error while fetching health intimation policies : "+e);
+			return null;
+		}
 	}
 	
 	

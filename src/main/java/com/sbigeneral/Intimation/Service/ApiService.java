@@ -11,4 +11,7 @@ public interface ApiService {
     public ResponseEntity<?> fetchSecurePolicyInfo(String policyNumber);
     
     public ResponseEntity<?> getPolicyDetails(String policyNumber);
+    
+    public ResponseEntity<?> getPolicyInfo();
+    
 }

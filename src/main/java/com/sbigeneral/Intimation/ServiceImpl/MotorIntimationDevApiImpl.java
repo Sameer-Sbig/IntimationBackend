@@ -2,6 +2,7 @@ package com.sbigeneral.Intimation.ServiceImpl;
 
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,6 +11,7 @@ import org.w3c.dom.NodeList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -150,6 +152,17 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 		}
 		
 		
+	}
+	@Override
+	public List<MotorClaimIntimation> getMotorIntimationPolicies() {
+		try {
+			List<MotorClaimIntimation> motorIntimationPolicies = motorIntimationRepo.getMotorIntimationData();
+			return motorIntimationPolicies;	
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error while fetching motor intimation policies : "+e);
+			return null;
+		}
 	}
 
 }

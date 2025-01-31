@@ -72,20 +72,20 @@ public class claimIntimationController {
 				return new ResponseEntity<String>(decryptedData,HttpStatus.OK);
 			} else { 
 				if(jsonObject.get("ErrorMessage") == null) {
-					return new ResponseEntity<String>(decryptedData,HttpStatus.BAD_REQUEST);
+					return new ResponseEntity<String>("Bad Request",HttpStatus.BAD_REQUEST);
 				} else {
-					return new ResponseEntity<String>(decryptedData,HttpStatus.INTERNAL_SERVER_ERROR);
+					return new ResponseEntity<String>("Claim can not be intimated !",HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 			}
 			
 		} catch(HttpClientErrorException e) {
 			logger.info("Error in controller HttpClient : "+e);
 			e.printStackTrace();
-			return new ResponseEntity<>(e.getMessage(),e.getStatusCode());
+			return new ResponseEntity<>("Claim can not be intimated !",e.getStatusCode());
 		} catch (Exception e) {
 			logger.info("Error in controller : "+e);
 			e.printStackTrace();
-			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>("Claim can not be intimated !",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
