@@ -129,8 +129,12 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 		            responseData.put("statusMessage", statusMessage);
 		            logger.info("The motor obj is + " + obj2);
 		            System.out.println("The response data is :" + responseData);
-		            motorIntimationRepo.save(obj2);
-		            return new ResponseEntity<>(responseData,HttpStatus.OK);
+		            if(claimNo.length() != 0) {
+		            	motorIntimationRepo.save(obj2);
+		            	return new ResponseEntity<>(responseData,HttpStatus.OK);
+		            } else {
+		            	return new ResponseEntity<>("Error Occured",HttpStatus.INTERNAL_SERVER_ERROR);
+		            }
 		            
 		            
 		            
@@ -161,6 +165,17 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("Error while fetching motor intimation policies : "+e);
+			return null;
+		}
+	}
+	@Override
+	public List<MotorClaimIntimation> getMotorIntimationsByRequestId(String requestId) {
+		try {
+			List<MotorClaimIntimation> data = motorIntimationRepo.getMotorIntimationByRequestId(requestId);
+			return data;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error while fetching health intimation policies by rquest id : "+e);
 			return null;
 		}
 	}

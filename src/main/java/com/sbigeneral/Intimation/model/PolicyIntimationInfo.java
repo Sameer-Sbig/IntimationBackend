@@ -1,12 +1,12 @@
 package com.sbigeneral.Intimation.model;
 
-public class PolicyInfo {
+public class PolicyIntimationInfo {
 	
 	private String customerName;
 	
-	private String customerMobileNo;
+	private int intimationAmount;
 	
-	private String customerEmailId;
+	private String intimationDate;
 	
 	private String policyNo;
 	
@@ -22,20 +22,20 @@ public class PolicyInfo {
 		this.customerName = customerName;
 	}
 
-	public String getCustomerMobileNo() {
-		return customerMobileNo;
+	public int getIntimationAmount() {
+		return intimationAmount;
 	}
 
-	public void setCustomerMobileNo(String customerMobileNo) {
-		this.customerMobileNo = customerMobileNo;
+	public void setIntimationAmount(int intimationAmount) {
+		this.intimationAmount = intimationAmount;
 	}
 
-	public String getCustomerEmailId() {
-		return customerEmailId;
+	public String getIntimationDate() {
+		return intimationDate;
 	}
 
-	public void setCustomerEmailId(String customerEmailId) {
-		this.customerEmailId = customerEmailId;
+	public void setIntimationDate(String intimationDate) {
+		this.intimationDate = intimationDate;
 	}
 
 	public String getPolicyNo() {
@@ -64,10 +64,12 @@ public class PolicyInfo {
 
 	@Override
 	public String toString() {
-		return "PolicyInfo [customerName=" + customerName + ", customerMobileNo=" + customerMobileNo
-				+ ", customerEmailId=" + customerEmailId + ", policyNo=" + policyNo + ", intimationNo=" + intimationNo
+		return "PolicyIntimationInfo [customerName=" + customerName + ", intimationAmount=" + intimationAmount
+				+ ", intimationDate=" + intimationDate + ", policyNo=" + policyNo + ", intimationNo=" + intimationNo
 				+ ", lob=" + lob + "]";
 	}
+
+	
 	
 	
 	

@@ -1,6 +1,8 @@
 package com.sbigeneral.Intimation.ServiceImpl;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -48,20 +51,25 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 	private static final Logger logger = LogManager.getLogger(claimIntimationController.class);
 
 	@Override
-	public ResponseEntity<?> saveHealthClaim(HealthClaimIntimation obj) {
+	public String saveHealthClaim(HealthClaimIntimation obj) {
 		try {
+			LocalDate today = LocalDate.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String todayDate = today.format(formatter);
+			obj.setDateOfintimation(todayDate);
+			
 			healthClaimRepo.save(obj);
-			return new ResponseEntity<>("Health Claim Saved Successfully !" , HttpStatus.OK);
+			return "Health Claim Saved Successfully in database !";
 		} catch (Exception e) {
 			System.out.println(e);
 			e.getLocalizedMessage();
-			return new ResponseEntity<>("Error Ocurred "+e.getLocalizedMessage() , HttpStatus.INTERNAL_SERVER_ERROR);
+			return "Error in saving intimation details in database : "+e;
 		}
 		
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Object>> saveDevApiHealthClaim(HealthClaimIntimation obj) {
+	public ResponseEntity<?> saveDevApiHealthClaim(HealthClaimIntimation obj) {
 		try {
 			Map<String, String> mediTokenReqBody = new HashMap<String, String>();
 			
@@ -111,8 +119,8 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 			encryptedPayload.put("EncryptedPayload", encryptedData);
 			
 			System.out.println("Encrypted Payload : "+encryptedPayload);
-			String decryptedData = decrypt.aes256cbcDecrypt(encryptedData);
-			System.out.println("Decrypted Payload : "+decryptedData);
+//			String decryptedData = decrypt.aes256cbcDecrypt(encryptedData);
+//			System.out.println("Decrypted Payload : "+decryptedData);
 			
 			// calling dev api to intimate claim
 			HttpHeaders headers = new HttpHeaders();
@@ -129,25 +137,42 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 			try {
 				ResponseEntity<Map<String,Object>> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity , responseType);
 				logger.info("Response got from health intimation : "+response);
-		    	return (ResponseEntity<Map<String, Object>>) new ResponseEntity<>(response.getBody(),HttpStatus.OK);
 				
+				String decryptedData = decrypt.aes256cbcDecrypt((String) response.getBody().get("EncryptedResponse"));
+				System.out.println("Decrypted Response : "+decryptedData);
+				logger.info("Decrypted responce : "+decryptedData);
+				
+				JSONObject jsonObject = new JSONObject(decryptedData);
+				
+				if(response.getBody().get("IsSuccess").equals(true)) {
+					obj.setIntimationNo(jsonObject.getString("IntimationNo"));
+					obj.setRequestId("123456");
+					String healthClaimSaved = saveHealthClaim(obj);
+					System.out.println(healthClaimSaved);
+					logger.info(healthClaimSaved);
+					return new ResponseEntity<String>(decryptedData,HttpStatus.OK);
+				} else {
+					System.out.println("Error in intimation");
+					logger.info("Error in intimation : "+jsonObject.get("ErrorMessage"));
+					if(jsonObject.get("ErrorMessage") == null) {
+						return new ResponseEntity<String>("Bad Request",HttpStatus.BAD_REQUEST);
+					} else {
+						return new ResponseEntity<String>("Claim can not be intimated !",HttpStatus.INTERNAL_SERVER_ERROR);
+					}
+				}	
 			} catch (HttpClientErrorException e) {
 				e.printStackTrace();
 				logger.info("Error in health intimation : "+e);
 				logger.info("Status code : "+e.getStatusCode());
-				Map<String,Object> error = new HashMap<String, Object>();
-				error.put("error", e.getMessage());
-				return new ResponseEntity<>(error,e.getStatusCode());
+				return new ResponseEntity<String>("Error occured",e.getStatusCode());
 			} catch(Exception e) {
-				Map<String, Object> errorMap = new HashMap<String, Object>();
-				logger.info("Error in fetching Devapi Token : "+e);
-				return new ResponseEntity<>(errorMap,HttpStatus.INTERNAL_SERVER_ERROR);
+				logger.info("Error in health intimation : "+e);
+				return new ResponseEntity<>("Error occured",HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			
 		} catch(Exception e) {
-			Map<String, Object> errorMap = new HashMap<String, Object>();
-			logger.info("Error in fetching Devapi Token : "+e);
-			return new ResponseEntity<>(errorMap,HttpStatus.INTERNAL_SERVER_ERROR);
+			logger.info("Error in health intimation : "+e);
+			return new ResponseEntity<>("Error occured",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 
@@ -161,6 +186,19 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("Error while fetching health intimation policies : "+e);
+			return null;
+		}
+	}
+
+	@Override
+	public List<HealthClaimIntimation> getHealthIntimationsByRequestId(String requestId) {
+		try {
+			List<HealthClaimIntimation> data = healthClaimRepo.getHealthIntimationByRequestId(requestId);
+			return data;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error while fetching health intimation policies by rquest id : "+e);
 			return null;
 		}
 	}

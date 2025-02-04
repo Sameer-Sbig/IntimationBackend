@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 import com.sbigeneral.Intimation.Entity.MotorClaimIntimation;
 import com.sbigeneral.Intimation.model.Claims;
 import com.sbigeneral.Intimation.model.ClaimsWrapper;
@@ -16,5 +17,7 @@ public interface MotorIntimationDevApi {
 	public ResponseEntity<?> IntimateChatBotService(ClaimsWrapper obj);
 	
 	public List<MotorClaimIntimation> getMotorIntimationPolicies();
+	
+	public List<MotorClaimIntimation> getMotorIntimationsByRequestId(String requestId);
 
 }

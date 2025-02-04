@@ -42,5 +42,11 @@ public class fetchDetails {
 		ResponseEntity<?> response = apiService.getPolicyInfo();
 		return response;
 	}
+	
+	@PostMapping("/getPolicyIntimationsByRequestId")
+	public ResponseEntity<?> getPolicyIntimationInfo(@RequestBody String requestId) {
+		ResponseEntity<?> response = apiService.getPolicyIntimations(requestId);
+		return response;
+	}
 
 }

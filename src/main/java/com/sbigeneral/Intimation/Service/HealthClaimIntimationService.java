@@ -11,10 +11,12 @@ import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 @Service
 public interface HealthClaimIntimationService {
 	
-	public ResponseEntity<?> saveHealthClaim(HealthClaimIntimation obj);
+	public String saveHealthClaim(HealthClaimIntimation obj);
 	
-	public ResponseEntity<Map<String,Object>> saveDevApiHealthClaim(HealthClaimIntimation obj);
+	public ResponseEntity<?> saveDevApiHealthClaim(HealthClaimIntimation obj);
 	
 	public List<HealthClaimIntimation> getHealthIntimationPolicies();
+	
+	public List<HealthClaimIntimation> getHealthIntimationsByRequestId(String requestId);
 	
 }

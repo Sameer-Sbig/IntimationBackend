@@ -13,7 +13,6 @@ D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimat
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\Service\HealthClaimIntimationService.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\Service\MotorClaimIntimation.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\model\SecurePolicyInfo.java
-D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\model\PolicyInfo.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\ServiceImpl\EncryptImpl.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\Entity\PolicyDetails.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\Exception\UserNotFoundException.java
@@ -23,6 +22,7 @@ D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimat
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\Entity\HealthClaimIntimation.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\Service\Encrypt.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\ServiceImpl\DevApiTokenServiceImpl.java
+D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\model\PolicyIntimationInfo.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\Repository\HealthClaimIntimationRepo.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\model\RequestBody.java
 D:\ClaimIntimationBackend\IntimationBackend\src\main\java\com\sbigeneral\Intimation\Service\ApiService.java

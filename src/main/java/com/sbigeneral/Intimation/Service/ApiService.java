@@ -14,4 +14,6 @@ public interface ApiService {
     
     public ResponseEntity<?> getPolicyInfo();
     
+    public ResponseEntity<?> getPolicyIntimations(String requestId);
+    
 }

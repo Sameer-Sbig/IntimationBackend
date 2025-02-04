@@ -3,6 +3,8 @@ package com.sbigeneral.Intimation.ServiceImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +33,7 @@ import com.sbigeneral.Intimation.Repository.MotorIntimationRepo;
 import com.sbigeneral.Intimation.Service.ApiService;
 import com.sbigeneral.Intimation.Service.HealthClaimIntimationService;
 import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;
-import com.sbigeneral.Intimation.model.PolicyInfo;
+import com.sbigeneral.Intimation.model.PolicyIntimationInfo;
 import com.sbigeneral.Intimation.model.SecurePolicyInfo;
 
 @Service
@@ -238,13 +240,16 @@ public class ApiServiceImpl implements ApiService {
 		try {
 			List<HealthClaimIntimation> healthIntimationPolicies = healthService.getHealthIntimationPolicies();
 			List<MotorClaimIntimation> motorIntimationPolicies = motorService.getMotorIntimationPolicies();
-			List<PolicyInfo> policyInfo = new ArrayList<PolicyInfo>();
+			List<PolicyIntimationInfo> policyInfo = new ArrayList<PolicyIntimationInfo>();
 			
+	        DateTimeFormatter originalFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy-HH:mm:ss");
+	        DateTimeFormatter targetFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        	
 			for(HealthClaimIntimation obj : healthIntimationPolicies) {
-				PolicyInfo policyInfoObj = new PolicyInfo();
+				PolicyIntimationInfo policyInfoObj = new PolicyIntimationInfo();
 				
-				policyInfoObj.setCustomerEmailId(obj.getCustomerEmailId());
-				policyInfoObj.setCustomerMobileNo(obj.getCustomerMobileNo());
+				policyInfoObj.setIntimationAmount(obj.getClaimAmount());
+				policyInfoObj.setIntimationDate(obj.getDateOfintimation());
 				policyInfoObj.setCustomerName(obj.getCustomerName());
 				policyInfoObj.setPolicyNo(obj.getPolicyNumber());
 				policyInfoObj.setIntimationNo(obj.getIntimationNo());
@@ -254,10 +259,13 @@ public class ApiServiceImpl implements ApiService {
 			}
 			
 			for(MotorClaimIntimation obj : motorIntimationPolicies) {
-				PolicyInfo policyInfoObj = new PolicyInfo();
+				PolicyIntimationInfo policyInfoObj = new PolicyIntimationInfo();
 				
-				policyInfoObj.setCustomerEmailId(obj.getEmailId());
-				policyInfoObj.setCustomerMobileNo(obj.getContactNumber());
+				LocalDateTime date = LocalDateTime.parse(obj.getTransactionTimestamp(), originalFormatter);
+				String formattedDate = date.format(targetFormatter);
+				
+				policyInfoObj.setIntimationAmount(Integer.parseInt(obj.getEstimatedClaimAmount()));
+				policyInfoObj.setIntimationDate(formattedDate);
 				policyInfoObj.setCustomerName(obj.getContactName());
 				policyInfoObj.setPolicyNo(obj.getPolicyNumber());
 				policyInfoObj.setIntimationNo(obj.getClaimNo());
@@ -276,6 +284,59 @@ public class ApiServiceImpl implements ApiService {
 			e.printStackTrace();
 			logger.info("Error while fetching policy intimation details : "+e);
 			return new ResponseEntity<>("Error while fetching policy intimation details",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	@Override
+	public ResponseEntity<?> getPolicyIntimations(String requestId) {
+		try {
+			List<HealthClaimIntimation> healthIntimationPolicies = healthService.getHealthIntimationsByRequestId(requestId);
+			List<MotorClaimIntimation> motorIntimationPolicies = motorService.getMotorIntimationsByRequestId(requestId);
+			List<PolicyIntimationInfo> policyInfo = new ArrayList<PolicyIntimationInfo>();
+			
+	        DateTimeFormatter originalFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy-HH:mm:ss");
+	        DateTimeFormatter targetFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        	
+			for(HealthClaimIntimation obj : healthIntimationPolicies) {
+				PolicyIntimationInfo policyInfoObj = new PolicyIntimationInfo();
+				
+				policyInfoObj.setIntimationAmount(obj.getClaimAmount());
+				policyInfoObj.setIntimationDate(obj.getDateOfintimation());
+				policyInfoObj.setCustomerName(obj.getCustomerName());
+				policyInfoObj.setPolicyNo(obj.getPolicyNumber());
+				policyInfoObj.setIntimationNo(obj.getIntimationNo());
+				policyInfoObj.setLob("Health");
+				
+				policyInfo.add(policyInfoObj);
+			}
+			
+			for(MotorClaimIntimation obj : motorIntimationPolicies) {
+				PolicyIntimationInfo policyInfoObj = new PolicyIntimationInfo();
+				
+				LocalDateTime date = LocalDateTime.parse(obj.getTransactionTimestamp(), originalFormatter);
+				String formattedDate = date.format(targetFormatter);
+				
+				policyInfoObj.setIntimationAmount(Integer.parseInt(obj.getEstimatedClaimAmount()));
+				policyInfoObj.setIntimationDate(formattedDate);
+				policyInfoObj.setCustomerName(obj.getContactName());
+				policyInfoObj.setPolicyNo(obj.getPolicyNumber());
+				policyInfoObj.setIntimationNo(obj.getClaimNo());
+				policyInfoObj.setLob("Motor");
+				
+				policyInfo.add(policyInfoObj);
+			}
+			
+			if(policyInfo.size() == 0) {
+				return new ResponseEntity<>("Details Not Found",HttpStatus.NOT_FOUND);
+			}
+			
+			return new ResponseEntity<>(policyInfo , HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error while fetching policy intimation details by request id : "+e);
+			return new ResponseEntity<>("Error while fetching policy intimation details by request id",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
     	

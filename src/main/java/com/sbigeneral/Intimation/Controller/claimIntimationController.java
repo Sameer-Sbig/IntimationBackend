@@ -39,12 +39,10 @@ public class claimIntimationController {
 	
 	@Autowired
 	private Encrypt encrypt;
-	
-	@Autowired
-	private HealthClaimIntimationRepo healthClaimIntimationRepo;
 
 	@Autowired
 	private MotorIntimationDevApi motorClaimServiceDevApi;
+	
 	private static final Logger logger = LogManager.getLogger(claimIntimationController.class);
 
 	@PostMapping("/intimateMotorClaim")
@@ -56,37 +54,8 @@ public class claimIntimationController {
 	
 	@PostMapping("/healthClaimIntimation")
 	public ResponseEntity<?> saveHealthClaimIntimation(@RequestBody HealthClaimIntimation obj) {
-		try {
-			System.out.println("Object : "+obj);
-			ResponseEntity<Map<String,Object>> saveDevApiHealthClaimReponse = healthClaimService.saveDevApiHealthClaim(obj);
-			logger.info("saveDev Api health claim response : "+saveDevApiHealthClaimReponse);
-			String decryptedData = decrypt.aes256cbcDecrypt((String) saveDevApiHealthClaimReponse.getBody().get("EncryptedResponse"));
-			logger.info("Decrypted responce : "+decryptedData);
-			System.out.println("Decrypted Response : "+decryptedData);
-			
-			JSONObject jsonObject = new JSONObject(decryptedData);
-			if(saveDevApiHealthClaimReponse.getBody().get("IsSuccess").equals(true)) {
-				obj.setIntimationNo(jsonObject.getString("IntimationNo"));
-				healthClaimIntimationRepo.save(obj);
-				System.out.println("intimation details save in db");
-				return new ResponseEntity<String>(decryptedData,HttpStatus.OK);
-			} else { 
-				if(jsonObject.get("ErrorMessage") == null) {
-					return new ResponseEntity<String>("Bad Request",HttpStatus.BAD_REQUEST);
-				} else {
-					return new ResponseEntity<String>("Claim can not be intimated !",HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-			}
-			
-		} catch(HttpClientErrorException e) {
-			logger.info("Error in controller HttpClient : "+e);
-			e.printStackTrace();
-			return new ResponseEntity<>("Claim can not be intimated !",e.getStatusCode());
-		} catch (Exception e) {
-			logger.info("Error in controller : "+e);
-			e.printStackTrace();
-			return new ResponseEntity<>("Claim can not be intimated !",HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		ResponseEntity<?> response = healthClaimService.saveDevApiHealthClaim(obj);
+		return response;
 	}
 	
 	@PostMapping("/encryptAES-256-CBC")

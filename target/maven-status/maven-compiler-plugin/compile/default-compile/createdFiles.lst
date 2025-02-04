@@ -4,7 +4,6 @@ com\sbigeneral\Intimation\Entity\MotorClaimIntimation.class
 com\sbigeneral\Intimation\Controller\claimIntimationController.class
 com\sbigeneral\Intimation\Exception\AccountLockedException.class
 com\sbigeneral\Intimation\model\Claim.class
-com\sbigeneral\Intimation\model\PolicyInfo.class
 com\sbigeneral\Intimation\ServletInitializer.class
 com\sbigeneral\Intimation\Entity\HealthPolicyMembers.class
 com\sbigeneral\Intimation\model\SecurePolicyInfo.class
@@ -37,4 +36,5 @@ com\sbigeneral\Intimation\Service\DevApiTokenService.class
 com\sbigeneral\Intimation\Controller\getPolicyInfoController.class
 com\sbigeneral\Intimation\Service\MotorIntimationDevApi.class
 com\sbigeneral\Intimation\Entity\HealthClaimIntimation.class
+com\sbigeneral\Intimation\model\PolicyIntimationInfo.class
 com\sbigeneral\Intimation\Service\MediTokenService.class

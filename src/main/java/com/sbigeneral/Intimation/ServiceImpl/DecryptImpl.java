@@ -55,28 +55,34 @@ public class DecryptImpl implements Decrypt {
 
 	@Override
 	public String aes256cbcDecrypt(String encryptedData) throws Exception {
+		String result = null;
+		try {
+			String base64key = "YmYzYzE5OWMyNDcwY2I0NzdkOTA3YjFlMDkxN2MxN2I=";
+			String base64Iv = "MkY1MkI3RUI3QzE3OTk2QQ==";
 
-		String base64key = "YmYzYzE5OWMyNDcwY2I0NzdkOTA3YjFlMDkxN2MxN2I=";
-		String base64Iv = "MkY1MkI3RUI3QzE3OTk2QQ==";
+			byte[] decodedKey = Base64.getDecoder().decode(base64key);
+			byte[] decodedIv = Base64.getDecoder().decode(base64Iv);
 
-		byte[] decodedKey = Base64.getDecoder().decode(base64key);
-		byte[] decodedIv = Base64.getDecoder().decode(base64Iv);
+			String IV1 = "2F52B7EB7C17996A";
+			String s1 = encryptedData.replace(IV1, "");
 
-		String IV1 = "2F52B7EB7C17996A";
-		String s1 = encryptedData.replace(IV1, "");
+			IvParameterSpec ivSpec = new IvParameterSpec(decodedIv);
+			SecretKeySpec keySpec = new SecretKeySpec(decodedKey, "AES");
 
-		IvParameterSpec ivSpec = new IvParameterSpec(decodedIv);
-		SecretKeySpec keySpec = new SecretKeySpec(decodedKey, "AES");
+			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+			cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
 
-		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-		cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
+			byte[] s2 = Base64.getDecoder().decode(s1);
+			byte[] originalPlainText = cipher.doFinal(s2);
 
-		byte[] s2 = Base64.getDecoder().decode(s1);
-		byte[] originalPlainText = cipher.doFinal(s2);
+			result = new String(originalPlainText, "UTF-8");
+			return result;
 
-		String result = new String(originalPlainText, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
 
-		return result;
 	}
 
 }
