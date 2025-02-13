@@ -18,6 +18,7 @@ com\sbigeneral\Intimation\model\ClaimsWrapper.class
 com\sbigeneral\Intimation\ServiceImpl\EncryptImpl.class
 com\sbigeneral\Intimation\model\RequestHeader.class
 com\sbigeneral\Intimation\ServiceImpl\HealthClaimIntimationServiceImpl.class
+com\sbigeneral\Intimation\ServiceImpl\DevApiTokenServiceImpl$1.class
 com\sbigeneral\Intimation\Intimation.class
 com\sbigeneral\Intimation\config\WebLogicConfig.class
 com\sbigeneral\Intimation\Service\ApiService.class
@@ -35,4 +36,5 @@ com\sbigeneral\Intimation\Service\DevApiTokenService.class
 com\sbigeneral\Intimation\Controller\getPolicyInfoController.class
 com\sbigeneral\Intimation\Service\MotorIntimationDevApi.class
 com\sbigeneral\Intimation\Entity\HealthClaimIntimation.class
+com\sbigeneral\Intimation\model\PolicyIntimationInfo.class
 com\sbigeneral\Intimation\Service\MediTokenService.class

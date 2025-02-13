@@ -3,6 +3,8 @@ package com.sbigeneral.Intimation.ServiceImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +22,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.*;
 import org.springframework.web.client.RestTemplate;
-
 import com.sbigeneral.Intimation.Controller.getPolicyInfoController;
+import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 import com.sbigeneral.Intimation.Entity.HealthPolicyMembers;
+import com.sbigeneral.Intimation.Entity.MotorClaimIntimation;
 import com.sbigeneral.Intimation.Entity.PolicyDetails;
 import com.sbigeneral.Intimation.Service.ApiService;
+import com.sbigeneral.Intimation.Service.HealthClaimIntimationService;
+import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;
+import com.sbigeneral.Intimation.model.PolicyIntimationInfo;
 import com.sbigeneral.Intimation.model.SecurePolicyInfo;
 
 @Service
@@ -37,7 +43,13 @@ public class ApiServiceImpl implements ApiService {
     
     @Value("${myapp.getPolicyInfo}")
     private String getReportLink;
-  
+     
+    @Autowired
+    private HealthClaimIntimationService healthService;
+    
+    @Autowired
+    private MotorIntimationDevApi motorService;
+    
 	@Override
 	public ResponseEntity<?> getSecurePolicyInfo(String policyNumber) {
 		// TODO Auto-generated method stub
@@ -168,7 +180,7 @@ public class ApiServiceImpl implements ApiService {
 				
 				String sql2 = "SELECT * FROM HEALTHPOLICY_MEMBERS WHERE POLICYNO = ?";
 				try (Connection conn2 = dataSource.getConnection();
-				         PreparedStatement ps2 = conn.prepareStatement(sql2)) {
+				         PreparedStatement ps2 = conn2.prepareStatement(sql2)) {
 					ps2.setString(1, policyNumber);
 					try(ResultSet rs2 = ps2.executeQuery()) {
 						List<HealthPolicyMembers> members = new ArrayList<HealthPolicyMembers>();
@@ -182,6 +194,7 @@ public class ApiServiceImpl implements ApiService {
 						}
 						
 						results.add(members);
+						System.out.println("Result size : "+results.size());
 					} catch (Exception e) {
 						e.printStackTrace();
 						logger.info("Error in fetching member details");
@@ -206,7 +219,7 @@ public class ApiServiceImpl implements ApiService {
 		}
 		
 		logger.info(results);
-		  if (results.isEmpty()) {
+		  if (results.size() <= 1) {
 			  logger.info("No data found for following policy no" + policyNumber);
 		        return new ResponseEntity<>("No data found for the given policy number", HttpStatus.NOT_FOUND);
 		    }
@@ -216,6 +229,112 @@ public class ApiServiceImpl implements ApiService {
 		
 		
 		
+	}
+
+
+	@Override
+	public ResponseEntity<?> getPolicyInfo() {
+		try {
+			List<HealthClaimIntimation> healthIntimationPolicies = healthService.getHealthIntimationPolicies();
+			List<MotorClaimIntimation> motorIntimationPolicies = motorService.getMotorIntimationPolicies();
+			List<PolicyIntimationInfo> policyInfo = new ArrayList<PolicyIntimationInfo>();
+			
+	        DateTimeFormatter originalFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy-HH:mm:ss");
+	        DateTimeFormatter targetFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        	
+			for(HealthClaimIntimation obj : healthIntimationPolicies) {
+				PolicyIntimationInfo policyInfoObj = new PolicyIntimationInfo();
+				
+				policyInfoObj.setIntimationAmount(obj.getClaimAmount());
+				policyInfoObj.setIntimationDate(obj.getDateOfintimation());
+				policyInfoObj.setCustomerName(obj.getCustomerName());
+				policyInfoObj.setPolicyNo(obj.getPolicyNumber());
+				policyInfoObj.setIntimationNo(obj.getIntimationNo());
+				policyInfoObj.setLob("Health");
+				
+				policyInfo.add(policyInfoObj);
+			}
+			
+			for(MotorClaimIntimation obj : motorIntimationPolicies) {
+				PolicyIntimationInfo policyInfoObj = new PolicyIntimationInfo();
+				
+				LocalDateTime date = LocalDateTime.parse(obj.getTransactionTimestamp(), originalFormatter);
+				String formattedDate = date.format(targetFormatter);
+				
+				policyInfoObj.setIntimationAmount(Integer.parseInt(obj.getEstimatedClaimAmount()));
+				policyInfoObj.setIntimationDate(formattedDate);
+				policyInfoObj.setCustomerName(obj.getContactName());
+				policyInfoObj.setPolicyNo(obj.getPolicyNumber());
+				policyInfoObj.setIntimationNo(obj.getClaimNo());
+				policyInfoObj.setLob("Motor");
+				
+				policyInfo.add(policyInfoObj);
+			}
+			
+			if(policyInfo.size() == 0) {
+				return new ResponseEntity<>("Details Not Found",HttpStatus.NOT_FOUND);
+			}
+			
+			return new ResponseEntity<>(policyInfo , HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error while fetching policy intimation details : "+e);
+			return new ResponseEntity<>("Error while fetching policy intimation details",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	@Override
+	public ResponseEntity<?> getPolicyIntimations(String requestId) {
+		try {
+			List<HealthClaimIntimation> healthIntimationPolicies = healthService.getHealthIntimationsByRequestId(requestId);
+			List<MotorClaimIntimation> motorIntimationPolicies = motorService.getMotorIntimationsByRequestId(requestId);
+			List<PolicyIntimationInfo> policyInfo = new ArrayList<PolicyIntimationInfo>();
+			
+	        DateTimeFormatter originalFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy-HH:mm:ss");
+	        DateTimeFormatter targetFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        	
+			for(HealthClaimIntimation obj : healthIntimationPolicies) {
+				PolicyIntimationInfo policyInfoObj = new PolicyIntimationInfo();
+				
+				policyInfoObj.setIntimationAmount(obj.getClaimAmount());
+				policyInfoObj.setIntimationDate(obj.getDateOfintimation());
+				policyInfoObj.setCustomerName(obj.getCustomerName());
+				policyInfoObj.setPolicyNo(obj.getPolicyNumber());
+				policyInfoObj.setIntimationNo(obj.getIntimationNo());
+				policyInfoObj.setLob("Health");
+				
+				policyInfo.add(policyInfoObj);
+			}
+			
+			for(MotorClaimIntimation obj : motorIntimationPolicies) {
+				PolicyIntimationInfo policyInfoObj = new PolicyIntimationInfo();
+				
+				LocalDateTime date = LocalDateTime.parse(obj.getTransactionTimestamp(), originalFormatter);
+				String formattedDate = date.format(targetFormatter);
+				
+				policyInfoObj.setIntimationAmount(Integer.parseInt(obj.getEstimatedClaimAmount()));
+				policyInfoObj.setIntimationDate(formattedDate);
+				policyInfoObj.setCustomerName(obj.getContactName());
+				policyInfoObj.setPolicyNo(obj.getPolicyNumber());
+				policyInfoObj.setIntimationNo(obj.getClaimNo());
+				policyInfoObj.setLob("Motor");
+				
+				policyInfo.add(policyInfoObj);
+			}
+			
+			if(policyInfo.size() == 0) {
+				return new ResponseEntity<>("Details Not Found",HttpStatus.NOT_FOUND);
+			}
+			
+			return new ResponseEntity<>(policyInfo , HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error while fetching policy intimation details by request id : "+e);
+			return new ResponseEntity<>("Error while fetching policy intimation details by request id",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
     	
 }

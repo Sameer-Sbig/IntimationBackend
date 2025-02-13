@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
+
 import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 import com.sbigeneral.Intimation.Repository.HealthClaimIntimationRepo;
 import com.sbigeneral.Intimation.Service.Decrypt;
@@ -37,12 +39,10 @@ public class claimIntimationController {
 	
 	@Autowired
 	private Encrypt encrypt;
-	
-	@Autowired
-	private HealthClaimIntimationRepo healthClaimIntimationRepo;
 
 	@Autowired
 	private MotorIntimationDevApi motorClaimServiceDevApi;
+	
 	private static final Logger logger = LogManager.getLogger(claimIntimationController.class);
 
 	@PostMapping("/intimateMotorClaim")
@@ -54,30 +54,8 @@ public class claimIntimationController {
 	
 	@PostMapping("/healthClaimIntimation")
 	public ResponseEntity<?> saveHealthClaimIntimation(@RequestBody HealthClaimIntimation obj) {
-		try {
-			System.out.println("Object : "+obj);
-			ResponseEntity<Map<String,Object>> saveDevApiHealthClaimReponse = healthClaimService.saveDevApiHealthClaim(obj);
-			
-			String decryptedData = decrypt.aes256cbcDecrypt((String) saveDevApiHealthClaimReponse.getBody().get("EncryptedResponse"));
-			
-			JSONObject jsonObject = new JSONObject(decryptedData);
-			if(saveDevApiHealthClaimReponse.getBody().get("IsSuccess").equals(true)) {
-				obj.setIntimationNo(jsonObject.getString("intimationNo"));
-				healthClaimIntimationRepo.save(obj);
-				System.out.println("intimation details save in db");
-				return new ResponseEntity<String>(decryptedData,HttpStatus.OK);
-			} else { 
-				if(jsonObject.get("ErrorMessage") == null) {
-					return new ResponseEntity<String>(decryptedData,HttpStatus.BAD_REQUEST);
-				} else {
-					return new ResponseEntity<String>(decryptedData,HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		ResponseEntity<?> response = healthClaimService.saveDevApiHealthClaim(obj);
+		return response;
 	}
 	
 	@PostMapping("/encryptAES-256-CBC")
@@ -104,6 +82,20 @@ public class claimIntimationController {
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+
+	// @PostMapping("/checkMotorStatus")
+	// public ResponseEntity<?> checkMotorStatus(@RequestBody Object obj) {
+	// 	//TODO: process POST request
+	// 	System.out.println(obj);	
+	// 	logger.info("The recieved obj is " + obj);
+	// 	try {
+			
+	// 	} catch (Exception e) {
+	// 		// TODO: handle exception
+	// 	}
+	// }
+	
 
 
 }

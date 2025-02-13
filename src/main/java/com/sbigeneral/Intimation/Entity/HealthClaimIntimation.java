@@ -87,12 +87,26 @@ public class HealthClaimIntimation {
 	@Column(name = "PATIENTNAME")
 	private String patientName;
 
+	@Column(name = "REQUESTID")
+	private String requestId;
+	
+	@Column(name = "DATEOFINTIMATION")
+	private String dateOfintimation;
+
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getIntimationNo() {
+		return intimationNo;
+	}
+
+	public void setIntimationNo(String intimationNo) {
+		this.intimationNo = intimationNo;
 	}
 
 	public String getMemeberId() {
@@ -271,12 +285,20 @@ public class HealthClaimIntimation {
 		this.patientName = patientName;
 	}
 
-	public String getIntimationNo() {
-		return intimationNo;
+	public String getRequestId() {
+		return requestId;
 	}
 
-	public void setIntimationNo(String intimationNo) {
-		this.intimationNo = intimationNo;
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
+	}
+
+	public String getDateOfintimation() {
+		return dateOfintimation;
+	}
+
+	public void setDateOfintimation(String dateOfintimation) {
+		this.dateOfintimation = dateOfintimation;
 	}
 
 	@Override
@@ -289,15 +311,9 @@ public class HealthClaimIntimation {
 				+ ", dateOfDischarge=" + dateOfDischarge + ", remark=" + remark + ", isAccidentCase=" + isAccidentCase
 				+ ", FIRNo=" + FIRNo + ", hospitalState=" + hospitalState + ", hospitalCity=" + hospitalCity
 				+ ", hospitalPinCode=" + hospitalPinCode + ", customerAlternateMobileNo=" + customerAlternateMobileNo
-				+ ", customerAlternateEmailId=" + customerAlternateEmailId + ", patientName=" + patientName + "]";
+				+ ", customerAlternateEmailId=" + customerAlternateEmailId + ", patientName=" + patientName
+				+ ", requestId=" + requestId + ", dateOfintimation=" + dateOfintimation + "]";
 	}
-
-	
-
-	
-	
-
-	
 	
 	
 	
