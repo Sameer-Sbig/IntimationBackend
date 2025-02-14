@@ -5,6 +5,8 @@ import com.sbigeneral.Intimation.Controller.claimIntimationController;
 import com.sbigeneral.Intimation.Service.ClaimStatusService;
 import com.sbigeneral.Intimation.Service.DevApiTokenService;
 import com.sbigeneral.Intimation.model.ClaimsWrapper;
+import com.sbigeneral.Intimation.model.FinalRequestDTO;
+import com.sbigeneral.Intimation.model.MotorClaimStatusChild1;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ClaimStatusServiceImpl implements ClaimStatusService{
     private String motorClaimStatusUrl;
 
 @Override
-public ResponseEntity<?> checkMotorClaimStatus(Object obj) {
+public ResponseEntity<?> checkMotorClaimStatus(FinalRequestDTO obj) {
     // TODO Auto-generated method stub
     ResponseEntity<Map<String, String>> token = getToken.getToken();
     System.out.println("The token is " + token.getBody());
@@ -54,11 +56,11 @@ public ResponseEntity<?> checkMotorClaimStatus(Object obj) {
         logger.info("The response is " + responseEntity.getBody());
         
         // Parse the JSON response
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Map<String, Object>> responseData = objectMapper.readValue(
-            responseEntity.getBody(), new TypeReference<List<Map<String, Object>>>() {});
+        // ObjectMapper objectMapper = new ObjectMapper();
+        // List<Map<String, Object>> responseData = objectMapper.readValue(
+        //     responseEntity.getBody(), new TypeReference<List<Map<String, Object>>>() {});
         
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
     } catch (Exception e) {
         e.printStackTrace();
         logger.warn(e);
