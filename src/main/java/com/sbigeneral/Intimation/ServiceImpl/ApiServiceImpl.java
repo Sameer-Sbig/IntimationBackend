@@ -22,14 +22,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.*;
 import org.springframework.web.client.RestTemplate;
-
 import com.sbigeneral.Intimation.Controller.getPolicyInfoController;
 import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 import com.sbigeneral.Intimation.Entity.HealthPolicyMembers;
 import com.sbigeneral.Intimation.Entity.MotorClaimIntimation;
 import com.sbigeneral.Intimation.Entity.PolicyDetails;
-import com.sbigeneral.Intimation.Repository.HealthClaimIntimationRepo;
-import com.sbigeneral.Intimation.Repository.MotorIntimationRepo;
 import com.sbigeneral.Intimation.Service.ApiService;
 import com.sbigeneral.Intimation.Service.HealthClaimIntimationService;
 import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;

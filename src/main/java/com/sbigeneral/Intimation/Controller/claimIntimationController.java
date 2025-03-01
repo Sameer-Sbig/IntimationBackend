@@ -17,11 +17,15 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 import com.sbigeneral.Intimation.Repository.HealthClaimIntimationRepo;
+import com.sbigeneral.Intimation.Service.ClaimStatusService;
 import com.sbigeneral.Intimation.Service.Decrypt;
 import com.sbigeneral.Intimation.Service.Encrypt;
 import com.sbigeneral.Intimation.Service.HealthClaimIntimationService;
+import com.sbigeneral.Intimation.Service.MotorClaimStatusRequestMappingService;
 import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;
 import com.sbigeneral.Intimation.model.ClaimsWrapper;
+import com.sbigeneral.Intimation.model.FinalRequestDTO;
+import com.sbigeneral.Intimation.model.MotorClaimStatusChild1;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:4200", "https://ansappsuat.sbigen.in", "http://localhost:5173",
@@ -42,6 +46,13 @@ public class claimIntimationController {
 
 	@Autowired
 	private MotorIntimationDevApi motorClaimServiceDevApi;
+
+	@Autowired
+	private MotorClaimStatusRequestMappingService requestMappingService;
+
+
+	@Autowired
+	private ClaimStatusService claimStatusService;
 	
 	private static final Logger logger = LogManager.getLogger(claimIntimationController.class);
 
@@ -55,6 +66,12 @@ public class claimIntimationController {
 	@PostMapping("/healthClaimIntimation")
 	public ResponseEntity<?> saveHealthClaimIntimation(@RequestBody HealthClaimIntimation obj) {
 		ResponseEntity<?> response = healthClaimService.saveDevApiHealthClaim(obj);
+		return response;
+	}
+	
+	@PostMapping("/healthClaimSubmit")
+	public ResponseEntity<?> saveHealthClaimSubmit(@RequestBody HealthClaimIntimation obj) {
+		ResponseEntity<?> response = healthClaimService.saveDevApiHealthClaimSubmit(obj);
 		return response;
 	}
 	
@@ -82,6 +99,24 @@ public class claimIntimationController {
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+
+	@PostMapping("/checkMotorStatus")
+	public ResponseEntity<?> checkMotorStatus(@RequestBody MotorClaimStatusChild1 obj) {
+		//TODO: process POST request
+		FinalRequestDTO finalObj = requestMappingService.mapRequest(obj);
+
+		System.out.println(finalObj);	
+		logger.info("The final obj is " + finalObj);
+		return claimStatusService.checkMotorClaimStatus(finalObj);
+		
+	}
+
+	  @PostMapping("/mapRequest")
+    public FinalRequestDTO mapRequest(@RequestBody MotorClaimStatusChild1 requestBodyDTO) {
+        return requestMappingService.mapRequest(requestBodyDTO);
+    }
+	
 
 
 }

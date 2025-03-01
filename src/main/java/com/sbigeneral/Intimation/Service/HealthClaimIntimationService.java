@@ -15,6 +15,8 @@ public interface HealthClaimIntimationService {
 	
 	public ResponseEntity<?> saveDevApiHealthClaim(HealthClaimIntimation obj);
 	
+	public ResponseEntity<?> saveDevApiHealthClaimSubmit(HealthClaimIntimation obj);
+	
 	public List<HealthClaimIntimation> getHealthIntimationPolicies();
 	
 	public List<HealthClaimIntimation> getHealthIntimationsByRequestId(String requestId);

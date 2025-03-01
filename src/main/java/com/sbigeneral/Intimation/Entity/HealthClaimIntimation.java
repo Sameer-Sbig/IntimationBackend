@@ -58,7 +58,7 @@ public class HealthClaimIntimation {
 	private String claimType;
 	
 	@Column(name = "DATEOFDISCHARGE")
-	private Date dateOfDischarge;
+	private String dateOfDischarge;
 	
 	@Column(name = "REMARK")
 	private String remark;
@@ -77,6 +77,12 @@ public class HealthClaimIntimation {
 	
 	@Column(name = "HOSPITALPINCODE")
 	private String hospitalPinCode;
+	
+	@Column(name = "HOSPITALADDRESS")
+	private String hospitalAddress;
+	
+	@Column(name = "HOSPITALID")
+	private String hospitalId;
 
 	@Column(name = "ALTERNATECONTACTNO")
 	private String customerAlternateMobileNo;
@@ -92,6 +98,9 @@ public class HealthClaimIntimation {
 	
 	@Column(name = "DATEOFINTIMATION")
 	private String dateOfintimation;
+	
+	@Column(name = "DISEASE")
+	private String disease;
 
 	public int getId() {
 		return id;
@@ -205,11 +214,11 @@ public class HealthClaimIntimation {
 		this.claimType = claimType;
 	}
 
-	public Date getDateOfDischarge() {
+	public String getDateOfDischarge() {
 		return dateOfDischarge;
 	}
 
-	public void setDateOfDischarge(Date dateOfDischarge) {
+	public void setDateOfDischarge(String dateOfDischarge) {
 		this.dateOfDischarge = dateOfDischarge;
 	}
 
@@ -261,6 +270,22 @@ public class HealthClaimIntimation {
 		this.hospitalPinCode = hospitalPinCode;
 	}
 
+	public String getHospitalAddress() {
+		return hospitalAddress;
+	}
+
+	public void setHospitalAddress(String hospitalAddress) {
+		this.hospitalAddress = hospitalAddress;
+	}
+
+	public String getHospitalId() {
+		return hospitalId;
+	}
+
+	public void setHospitalId(String hospitalId) {
+		this.hospitalId = hospitalId;
+	}
+
 	public String getCustomerAlternateMobileNo() {
 		return customerAlternateMobileNo;
 	}
@@ -301,6 +326,14 @@ public class HealthClaimIntimation {
 		this.dateOfintimation = dateOfintimation;
 	}
 
+	public String getDisease() {
+		return disease;
+	}
+
+	public void setDisease(String disease) {
+		this.disease = disease;
+	}
+
 	@Override
 	public String toString() {
 		return "HealthClaimIntimation [id=" + id + ", intimationNo=" + intimationNo + ", memeberId=" + memeberId
@@ -310,10 +343,15 @@ public class HealthClaimIntimation {
 				+ doctorName + ", claimAmount=" + claimAmount + ", roomType=" + roomType + ", claimType=" + claimType
 				+ ", dateOfDischarge=" + dateOfDischarge + ", remark=" + remark + ", isAccidentCase=" + isAccidentCase
 				+ ", FIRNo=" + FIRNo + ", hospitalState=" + hospitalState + ", hospitalCity=" + hospitalCity
-				+ ", hospitalPinCode=" + hospitalPinCode + ", customerAlternateMobileNo=" + customerAlternateMobileNo
+				+ ", hospitalPinCode=" + hospitalPinCode + ", hospitalAddress=" + hospitalAddress + ", hospitalId="
+				+ hospitalId + ", customerAlternateMobileNo=" + customerAlternateMobileNo
 				+ ", customerAlternateEmailId=" + customerAlternateEmailId + ", patientName=" + patientName
-				+ ", requestId=" + requestId + ", dateOfintimation=" + dateOfintimation + "]";
+				+ ", requestId=" + requestId + ", dateOfintimation=" + dateOfintimation + ", disease=" + disease + "]";
 	}
+	
+	
+
+	
 	
 	
 	
