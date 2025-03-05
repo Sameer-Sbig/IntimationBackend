@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -217,10 +218,11 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 			mediTokenReqBody.put("EncryptedPayload",
 					"Q0khVHD9Fr4mThd5XTHZuJGdoOogNg8yRHcMTj0f1+0kxJLICjhwg0d0vKnPUXJ/bd4HRlUI5noFkZEBXh57hBjk2Ffya97uwHbG3V0fF+99hkiRk2cnW+gNDDOJjs1giv4+xPUbOYiTXJ4AIyllXPoIig2TijQEXbulRbTMtt/RtR3m27tNfQ0U/srd5njiiFCgR9/AAWQ/7BGMZyRxz8oH/rd3NTrEasyRh1guJU06iUWlpl7uUtQFMlizYRF7hn/McjK0YEHYZerLc2zdGA==");
 
-			String mediToken = mediTokenService.getMediToken(mediTokenReqBody,devApiToken.getBody().get("accessToken"));
-			
+			String mediToken = mediTokenService.getMediToken(mediTokenReqBody,
+					devApiToken.getBody().get("accessToken"));
+
 			Map<String, Object> devApiModel = new HashMap<String, Object>();
-			
+
 			devApiModel.put("ACCESS_TOKEN", mediToken);
 			devApiModel.put("PolicyNo", obj.getPolicyNumber());
 			devApiModel.put("MemberID", obj.getMemeberId());
@@ -230,9 +232,9 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 			devApiModel.put("ClaimDateOfDischarge", obj.getDateOfDischarge());
 			devApiModel.put("HospName", obj.getHospitalName());
 			devApiModel.put("HospAddress", obj.getHospitalAddress());
-			if(obj.getHospitalId().equals("")) {
+			if (obj.getHospitalId().equals("")) {
 				devApiModel.put("HospID", null);
-			}else {				
+			} else {
 				devApiModel.put("HospID", obj.getHospitalId());
 			}
 			devApiModel.put("ReasonForHospitalization", obj.getAdmissionReason());
@@ -241,18 +243,18 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 			devApiModel.put("ClaimType", obj.getClaimType());
 			devApiModel.put("InsurerClaimNo", null);
 			devApiModel.put("MainClaimNo", 0);
-			
+
 			Map<String, Object> fileAttributes = new HashMap<>();
-	        fileAttributes.put("FileName", "Test.Pdf");
-	        fileAttributes.put("FilePath", "https://morth.nic.in/sites/default/files/dd12-13_0.pdf");
-	        fileAttributes.put("FileTags", null);
-	        
-	        ArrayList<Map<String, Object>> claimSubmissionAttachments = new ArrayList<>();
-	        claimSubmissionAttachments.add(fileAttributes);
-	        
-	        devApiModel.put("ClaimSubmissionAttachments", claimSubmissionAttachments);
-	        
-	        Map<String, Object> requestBody = new HashMap<String, Object>();
+			fileAttributes.put("FileName", "Test.Pdf");
+			fileAttributes.put("FilePath", "https://morth.nic.in/sites/default/files/dd12-13_0.pdf");
+			fileAttributes.put("FileTags", null);
+
+			ArrayList<Map<String, Object>> claimSubmissionAttachments = new ArrayList<>();
+			claimSubmissionAttachments.add(fileAttributes);
+
+			devApiModel.put("ClaimSubmissionAttachments", claimSubmissionAttachments);
+
+			Map<String, Object> requestBody = new HashMap<String, Object>();
 
 			Map<String, String> requestHeadervalues = new HashMap<String, String>();
 			requestHeadervalues.put("requestID", obj.getRequestId());
@@ -262,13 +264,13 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 
 			requestBody.put("RequestHeader", requestHeadervalues);
 			requestBody.put("RequestBody", devApiModel);
-			System.out.println("Request Body : "+requestBody);
+			System.out.println("Request Body : " + requestBody);
 			String encryptedData = encrypt.aes256cbcEncrypt(requestBody);
 			Map<String, String> encryptedPayload = new HashMap<String, String>();
 			encryptedPayload.put("EncryptedPayload", encryptedData);
-			System.out.println("Devapi Token : "+devApiToken.getBody().get("accessToken"));
-			System.out.println("Encrypted data : "+encryptedData);
-			
+			System.out.println("Devapi Token : " + devApiToken.getBody().get("accessToken"));
+			System.out.println("Encrypted data : " + encryptedData);
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("X-IBM-Client-Id", "458b817795bad480c5c59e6c424fd285");
 			headers.set("X-IBM-Client-Secret", "51d9ae9279382a4fa6f1becd4c41ca84");
@@ -277,21 +279,22 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 			HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(encryptedPayload, headers);
 			Class<Map<String, Object>> responseType = (Class<Map<String, Object>>) (Class<?>) Map.class;
 			RestTemplate restTemplate = new RestTemplate();
-			
+
 			try {
-				ResponseEntity<Map<String, Object>> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity,responseType);
+				ResponseEntity<Map<String, Object>> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity,
+						responseType);
 				String decryptedData = decrypt.aes256cbcDecrypt((String) response.getBody().get("EncryptedResponse"));
 				logger.info("Decrypted response got from health claim submit : " + decryptedData);
-				
+
 				JSONObject jsonObject = new JSONObject(decryptedData);
-				if(jsonObject.getBoolean("IsSuccess") == true) {
+				if (jsonObject.getBoolean("IsSuccess") == true) {
 					obj.setIntimationNo(jsonObject.getString("ClaimReferenceNo"));
 					String healthClaimSaved = saveHealthClaim(obj);
 					logger.info(healthClaimSaved);
-					return new ResponseEntity<>(decryptedData,HttpStatus.OK);
+					return new ResponseEntity<>(decryptedData, HttpStatus.OK);
 				} else {
 					System.out.println(jsonObject.getString("ErrorMessage"));
-					logger.info("Error from devapi claim submit service : "+jsonObject.getString("ErrorMessage"));
+					logger.info("Error from devapi claim submit service : " + jsonObject.getString("ErrorMessage"));
 					return new ResponseEntity<String>("Error occured", HttpStatus.BAD_REQUEST);
 				}
 			} catch (HttpClientErrorException e) {
@@ -300,11 +303,88 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 				logger.info("Status code : " + e.getStatusCode());
 				return new ResponseEntity<String>("Error occured", e.getStatusCode());
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("Error occured in claim submit : "+e);
-			return new ResponseEntity<>("Error occured",HttpStatus.INTERNAL_SERVER_ERROR);
+			logger.info("Error occured in claim submit : " + e);
+			return new ResponseEntity<>("Error occured", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@Override
+	public ResponseEntity<?> checkHealthClaimStatus(Map<String,String> obj) {
+		try {
+			Map<String, String> mediTokenReqBody = new HashMap<String, String>();
+
+			ResponseEntity<Map<String, String>> devApiToken = devApiTokenService.getToken();
+
+			mediTokenReqBody.put("EncryptedPayload",
+					"Q0khVHD9Fr4mThd5XTHZuJGdoOogNg8yRHcMTj0f1+0kxJLICjhwg0d0vKnPUXJ/bd4HRlUI5noFkZEBXh57hBjk2Ffya97uwHbG3V0fF+99hkiRk2cnW+gNDDOJjs1giv4+xPUbOYiTXJ4AIyllXPoIig2TijQEXbulRbTMtt/RtR3m27tNfQ0U/srd5njiiFCgR9/AAWQ/7BGMZyRxz8oH/rd3NTrEasyRh1guJU06iUWlpl7uUtQFMlizYRF7hn/McjK0YEHYZerLc2zdGA==");
+
+			String mediToken = mediTokenService.getMediToken(mediTokenReqBody,devApiToken.getBody().get("accessToken"));
+			
+			Map<String, Object> requestBody = new HashMap<String, Object>();
+			Map<String,String> requestBodyValues = new HashMap<String, String>();
+			
+			requestBodyValues.put("ACCESS_TOKEN", mediToken);
+			requestBodyValues.put("ClaimRefNo", obj.get("claimRefNo"));
+
+			Map<String, String> requestHeadervalues = new HashMap<String, String>();
+			requestHeadervalues.put("requestID", obj.get("requestId"));
+			requestHeadervalues.put("action", "MobileApp_ClaimDetails_Meddi");
+			requestHeadervalues.put("channel", "SBIG");
+			requestHeadervalues.put("transactionTimestamp", "01-Feb-2018-01:02:02");
+
+			requestBody.put("RequestHeader", requestHeadervalues);
+			requestBody.put("RequestBody", requestBodyValues);
+			
+			String encryptedData = encrypt.aes256cbcEncrypt(requestBody);
+			Map<String, String> encryptedPayload = new HashMap<String, String>();
+			encryptedPayload.put("EncryptedPayload", encryptedData);
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("X-IBM-Client-Id", "458b817795bad480c5c59e6c424fd285");
+			headers.set("X-IBM-Client-Secret", "51d9ae9279382a4fa6f1becd4c41ca84");
+			headers.set("Authorization", devApiToken.getBody().get("accessToken"));
+			final String apiUrl = "http://devapiintra.sbigen.in:8443/ept/claimdetails";
+			HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(encryptedPayload, headers);
+			Class<Map<String, Object>> responseType = (Class<Map<String, Object>>) (Class<?>) Map.class;
+			RestTemplate restTemplate = new RestTemplate();
+			
+			try {
+				ResponseEntity<Map<String, Object>> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity,responseType);
+				String decryptedData = decrypt.aes256cbcDecrypt((String) response.getBody().get("EncryptedResponse"));
+				logger.info("Decrypted response got from health claim details : " + decryptedData);
+
+				JSONObject jsonObject = new JSONObject(decryptedData);
+				if (jsonObject.getBoolean("IsSuccess") == true) {
+					JSONArray claimsData = jsonObject.getJSONArray("ClaimsData");
+					JSONObject claim = claimsData.getJSONObject(0);
+					
+					Map<String, String> claimStatus = new HashMap<String, String>();
+					claimStatus.put("statusMessage", claim.getString("STATUS"));
+					logger.info(claimStatus);
+					
+					return new ResponseEntity<>(claimStatus,HttpStatus.OK);
+				} else {
+					logger.info("Error from devapi claim details service : " + jsonObject.getString("ErrorMessage"));
+					Map<String, String> claimStatus = new HashMap<String, String>();
+					claimStatus.put("statusMessage", jsonObject.getString("ErrorMessage"));
+					return new ResponseEntity<>(claimStatus,HttpStatus.OK);
+				}
+	
+			} catch (HttpClientErrorException e) {
+				e.printStackTrace();
+				logger.info("Error from health claim details devapi service : " + e);
+				logger.info("Status code : " + e.getStatusCode());
+				return new ResponseEntity<String>("Error occured", e.getStatusCode());
+			}
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error occured in claim status : " + e);
+			return new ResponseEntity<>("Error occured", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

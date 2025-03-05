@@ -111,6 +111,12 @@ public class claimIntimationController {
 		return claimStatusService.checkMotorClaimStatus(finalObj);
 		
 	}
+	
+	@PostMapping("/checkHealthStatus")
+	public ResponseEntity<?> checkHealthStatus(@RequestBody Map<String,String> obj) {
+		ResponseEntity<?> response = healthClaimService.checkHealthClaimStatus(obj);
+		return response;
+	}
 
 	  @PostMapping("/mapRequest")
     public FinalRequestDTO mapRequest(@RequestBody MotorClaimStatusChild1 requestBodyDTO) {
