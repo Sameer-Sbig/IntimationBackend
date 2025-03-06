@@ -26,6 +26,7 @@ import com.sbigeneral.Intimation.Entity.AgentDetails;
 import com.sbigeneral.Intimation.Repository.AgentDetailsRepo;
 import com.sbigeneral.Intimation.Repository.AgentRepo;
 import com.sbigeneral.Intimation.Service.AgentDetailsService;
+import com.sbigeneral.Intimation.Util.ClientAgentAuthenticationToken;
 import com.sbigeneral.Intimation.Util.JwtAgentDetailsService;
 import com.sbigeneral.Intimation.Util.JwtRequest;
 import com.sbigeneral.Intimation.Util.JwtTokenUtil;
@@ -117,12 +118,12 @@ public class AuthenticationController {
 	
 	private void authenticate(String clientId, String agentId) throws Exception {
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(clientId, agentId));
+			authenticationManager.authenticate(new ClientAgentAuthenticationToken(clientId, agentId));
 		} catch (DisabledException e) {
 			e.printStackTrace();
 		} catch (BadCredentialsException e) {
 			e.printStackTrace();
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
-	}
+}
 }

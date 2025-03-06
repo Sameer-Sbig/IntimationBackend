@@ -33,6 +33,7 @@ public class AgentDetailsServiceImpl implements AgentDetailsService {
 				throw new IllegalStateException("User is already logged in from other session");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new IllegalStateException("wrong credentials");
 		}
 		return agentDetails;

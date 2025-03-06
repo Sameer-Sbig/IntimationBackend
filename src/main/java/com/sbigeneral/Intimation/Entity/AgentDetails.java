@@ -20,7 +20,7 @@ public class AgentDetails {
 	private String token;
 	
 	@Column(name = "SESSIONCOUNT")
-	private int sessionCount;
+	private Integer sessionCount;
 
 	public String getAgentId() {
 		return agentId;
@@ -46,11 +46,11 @@ public class AgentDetails {
 		this.token = token;
 	}
 
-	public int getSessionCount() {
+	public Integer getSessionCount() {
 		return sessionCount;
 	}
 
-	public void setSessionCount(int sessionCount) {
+	public void setSessionCount(Integer sessionCount) {
 		this.sessionCount = sessionCount;
 	}
 
