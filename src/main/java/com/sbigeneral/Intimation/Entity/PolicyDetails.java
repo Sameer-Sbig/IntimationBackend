@@ -3,6 +3,7 @@ package com.sbigeneral.Intimation.Entity;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 
 import org.springframework.transaction.annotation.Transactional;
 
+@Entity
 @Table(name="POLICYDETAILS")
 public class PolicyDetails {
 	
@@ -58,6 +60,9 @@ public class PolicyDetails {
 	
 	@Column(name="LOB")
 	private String lob;
+	
+	@Column(name = "AGREEMENT_CODE")
+	private String agreementCode;
 	
 
 	public int getId() {
@@ -179,6 +184,14 @@ public class PolicyDetails {
 	public void setLob(String lob) {
 		this.lob = lob;
 	}
+	
+	public String getAgreementCode() {
+		return agreementCode;
+	}
+
+	public void setAgreementCode(String agreementCode) {
+		this.agreementCode = agreementCode;
+	}
 
 	@Override
 	public String toString() {
@@ -187,7 +200,7 @@ public class PolicyDetails {
 				+ ", alternateEmailId=" + alternateEmailId + ", policyStartDate=" + policyStartDate + ", policyEndDate="
 				+ policyEndDate + ", productName=" + productName + ", registrationNo=" + registrationNo
 				+ ", drivingLicenseNo=" + drivingLicenseNo + ", engineNo=" + engineNo + ", chasisNo=" + chasisNo
-				+ ", lob=" + lob + "]";
+				+ ", lob=" + lob + ", agreementCode=" + agreementCode + "]";
 	}
 
 

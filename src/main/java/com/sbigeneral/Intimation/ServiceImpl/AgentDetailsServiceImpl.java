@@ -45,9 +45,26 @@ public class AgentDetailsServiceImpl implements AgentDetailsService {
 		
 		if(agent != null) {
 			agent.setSessionCount(0);
+			agent.setToken(null);
 			agentDetailsRepo.save(agent);
 		}
 		
+	}
+
+	@Override
+	public Boolean checkAgreementCodeWithClientId(String clientId , String agentId) {
+		try {
+			String agreementCodeByClientId = agentDetailsRepo.findAgreementCodeByClientId(clientId);
+			if(agreementCodeByClientId.equals(agentId)) {
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

@@ -21,4 +21,7 @@ public interface AgentDetailsRepo extends JpaRepository<AgentDetails, String> {
 	@Transactional
 	public void storeToken(@Param("token") String token , @Param("clientId") String clientId);
 	
+	@Query("SELECT a.agentId FROM AgentDetails a WHERE a.clientId =:clientId")
+	public String findAgreementCodeByClientId(@Param("clientId") String clientId);
+	
 }

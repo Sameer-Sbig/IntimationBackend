@@ -10,4 +10,6 @@ public interface AgentDetailsService {
 	public AgentDetails login(String clientId ,String agentId);
 	
 	public void logout(String clientId);
+	
+	public Boolean checkAgreementCodeWithClientId(String clientId , String agentId);
 }

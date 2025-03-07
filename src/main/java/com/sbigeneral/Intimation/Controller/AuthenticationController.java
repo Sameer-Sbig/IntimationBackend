@@ -26,6 +26,7 @@ import com.sbigeneral.Intimation.Entity.AgentDetails;
 import com.sbigeneral.Intimation.Repository.AgentDetailsRepo;
 import com.sbigeneral.Intimation.Repository.AgentRepo;
 import com.sbigeneral.Intimation.Service.AgentDetailsService;
+import com.sbigeneral.Intimation.Service.PolicyDetailsService;
 import com.sbigeneral.Intimation.Util.ClientAgentAuthenticationToken;
 import com.sbigeneral.Intimation.Util.JwtAgentDetailsService;
 import com.sbigeneral.Intimation.Util.JwtRequest;
@@ -60,6 +61,9 @@ public class AuthenticationController {
 	@Autowired
 	private AgentDetailsService agentDetailsServive;
 	
+	@Autowired
+	private PolicyDetailsService policyDetailsService;
+	
 	private static final Logger logger = LogManager.getLogger(AuthenticationController.class);
 	
 	@PostMapping("/getClientId")
@@ -68,6 +72,7 @@ public class AuthenticationController {
 			
 			String agentId = obj.get("agentId");
 			String clientId = UUID.randomUUID().toString();
+			clientId = clientId.substring(0, 8);
 			Map<String, String> clientID = new HashMap<String, String>();
 			
 			AgentDetails agent = new AgentDetails();
@@ -102,6 +107,17 @@ public class AuthenticationController {
 			
 			AgentDetails loggedInAgent = agentDetailsServive.login(authenticationRequest.getClientId(), authenticationRequest.getAgentId());
 			
+			
+			Boolean flag1 = policyDetailsService.checkPolicyWithAgreementCode(authenticationRequest.getPolicyNo(), authenticationRequest.getAgentId());
+			if(!flag1) {
+				return new ResponseEntity<>("Not a valid policy against agreement code !",HttpStatus.NOT_FOUND);
+			}
+			
+			Boolean flag2 = agentDetailsServive.checkAgreementCodeWithClientId(authenticationRequest.getClientId(), authenticationRequest.getAgentId());
+			if(!flag2) {
+				return new ResponseEntity<>("Not a valid client id against agreement code !",HttpStatus.NOT_FOUND);
+			}
+			
 			if(loggedInAgent != null) {
 				return new ResponseEntity<>(response,HttpStatus.OK);
 				
@@ -125,5 +141,17 @@ public class AuthenticationController {
 			e.printStackTrace();
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
-}
+	}
+	
+	@PostMapping("/logoutUser")
+	public ResponseEntity<?> logout(@RequestBody Map<String,String> clientId) {
+		try {
+			System.out.println("Logout api");
+			agentDetailsServive.logout(clientId.get("clientId"));
+			return new ResponseEntity<>("Logout succesfully ",HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Something went wrong",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
