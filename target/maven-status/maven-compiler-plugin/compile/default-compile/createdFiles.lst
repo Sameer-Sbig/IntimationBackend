@@ -16,6 +16,7 @@ com\sbigeneral\Intimation\Util\WebSecurityConfig.class
 com\sbigeneral\Intimation\ServiceImpl\DevApiTokenServiceImpl$1.class
 com\sbigeneral\Intimation\config\WebLogicConfig.class
 com\sbigeneral\Intimation\Service\ApiService.class
+com\sbigeneral\Intimation\Util\CachedBodyHttpServletRequest$1.class
 com\sbigeneral\Intimation\Util\JwtAgentDetailsService.class
 com\sbigeneral\Intimation\Util\JwtTokenUtil.class
 com\sbigeneral\Intimation\ServiceImpl\MotorClaimStatusRequestMappingServiceImpl.class
@@ -53,8 +54,10 @@ com\sbigeneral\Intimation\Service\Decrypt.class
 com\sbigeneral\Intimation\model\RequestBody.class
 com\sbigeneral\Intimation\Entity\AgentDetails.class
 com\sbigeneral\Intimation\model\RequestHeader.class
+com\sbigeneral\Intimation\Util\CachedBodyHttpServletRequest.class
 com\sbigeneral\Intimation\Intimation.class
 com\sbigeneral\Intimation\Repository\AgentRepo.class
+com\sbigeneral\Intimation\Controller\CustomerPortalController.class
 com\sbigeneral\Intimation\config\RateLimitingConfig.class
 com\sbigeneral\Intimation\Service\Encrypt.class
 com\sbigeneral\Intimation\Service\HealthClaimIntimationService.class

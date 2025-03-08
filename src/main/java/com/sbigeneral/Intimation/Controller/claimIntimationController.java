@@ -118,7 +118,7 @@ public class claimIntimationController {
 		return response;
 	}
 
-	  @PostMapping("/mapRequest")
+	@PostMapping("/mapRequest")
     public FinalRequestDTO mapRequest(@RequestBody MotorClaimStatusChild1 requestBodyDTO) {
         return requestMappingService.mapRequest(requestBodyDTO);
     }
