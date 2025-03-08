@@ -107,10 +107,11 @@ public class AuthenticationController {
 			
 			AgentDetails loggedInAgent = agentDetailsServive.login(authenticationRequest.getClientId(), authenticationRequest.getAgentId());
 			
-			
-			Boolean flag1 = policyDetailsService.checkPolicyWithAgreementCode(authenticationRequest.getPolicyNo(), authenticationRequest.getAgentId());
-			if(!flag1) {
-				return new ResponseEntity<>("Not a valid policy against agreement code !",HttpStatus.NOT_FOUND);
+			if(!authenticationRequest.getPolicyNo().equals("")) {
+				Boolean flag1 = policyDetailsService.checkPolicyWithAgreementCode(authenticationRequest.getPolicyNo(), authenticationRequest.getAgentId());
+				if(!flag1) {
+					return new ResponseEntity<>("Not a valid policy against agreement code !",HttpStatus.NOT_FOUND);
+				}
 			}
 			
 			Boolean flag2 = agentDetailsServive.checkAgreementCodeWithClientId(authenticationRequest.getClientId(), authenticationRequest.getAgentId());
