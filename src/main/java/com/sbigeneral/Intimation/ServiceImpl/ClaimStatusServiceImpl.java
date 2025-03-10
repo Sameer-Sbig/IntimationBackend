@@ -73,4 +73,10 @@ public ResponseEntity<?> checkMotorClaimStatus(FinalRequestDTO obj) {
     //     throw new UnsupportedOperationException("Unimplemented method 'checkHealthClaimStatus'");
     // }
 
+@Override
+public ResponseEntity<?> checkMotorStatusCustomerPortal(String claimRefNo) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 }

@@ -13,4 +13,6 @@ public interface ClaimStatusService {
 
     // public ResponseEntity<?> checkHealthClaimStatus(Object obj);
     
+    public ResponseEntity<?> checkMotorStatusCustomerPortal(String claimRefNo);
+    
 } 

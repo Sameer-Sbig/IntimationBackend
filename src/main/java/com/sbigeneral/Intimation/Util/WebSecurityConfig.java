@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable()
 				// don't authenticate the getToken request
-				.authorizeRequests().antMatchers("/getToken","/getPolicyDetailCustomerPortal","/getClientId","/logoutUser", "/basic/register","/util/*","/logoutpage").permitAll().
+				.authorizeRequests().antMatchers("/getToken","/CustomerPortal/*","/getClientId","/logoutUser", "/basic/register","/util/*","/logoutpage").permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().
 				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)

@@ -1,6 +1,8 @@
 package com.sbigeneral.Intimation.ServiceImpl;
 
 import java.io.StringReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,7 @@ import com.sbigeneral.Intimation.Repository.MotorIntimationRepo;
 import com.sbigeneral.Intimation.Service.DevApiTokenService;
 import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;
 import com.sbigeneral.Intimation.model.ClaimsWrapper;
+import com.sbigeneral.Intimation.model.PolicyIntimationInfo;
 
 
 @Service
@@ -177,6 +180,38 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 			e.printStackTrace();
 			logger.info("Error while fetching health intimation policies by rquest id : "+e);
 			return null;
+		}
+	}
+	
+	@Override
+	public ResponseEntity<?> getMotorIntimationDetailsByClaimNo(String claimNo) {
+		try {
+			MotorClaimIntimation obj = motorIntimationRepo.getMotorIntimationByClaimNo(claimNo);
+			PolicyIntimationInfo policyInfoObj = new PolicyIntimationInfo();
+			
+			DateTimeFormatter originalFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy-HH:mm:ss");
+	        DateTimeFormatter targetFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			LocalDateTime date = LocalDateTime.parse(obj.getTransactionTimestamp(), originalFormatter);
+			String formattedDate = date.format(targetFormatter);
+			
+			policyInfoObj.setIntimationAmount(Integer.parseInt(obj.getEstimatedClaimAmount()));
+			policyInfoObj.setIntimationDate(formattedDate);
+			policyInfoObj.setCustomerName(obj.getContactName());
+			policyInfoObj.setPolicyNo(obj.getPolicyNumber());
+			policyInfoObj.setIntimationNo(obj.getClaimNo());
+			policyInfoObj.setLob("Motor");
+			
+			if(policyInfoObj == null) {
+				return new ResponseEntity<>("Details not found against this claim No",HttpStatus.NOT_FOUND);
+			}
+			
+			return new ResponseEntity<>(policyInfoObj,HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error while fetching health intimation policies by claimNo : "+e);
+			return new ResponseEntity<>("Error while fetching policy intimation details",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
