@@ -31,6 +31,7 @@ import com.sbigeneral.Intimation.Service.DevApiTokenService;
 import com.sbigeneral.Intimation.Service.Encrypt;
 import com.sbigeneral.Intimation.Service.HealthClaimIntimationService;
 import com.sbigeneral.Intimation.Service.MediTokenService;
+import com.sbigeneral.Intimation.model.PolicyIntimationInfo2;
 
 @Service
 public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationService {
@@ -386,6 +387,36 @@ public class HealthClaimIntimationServiceImpl implements HealthClaimIntimationSe
 			logger.info("Error occured in claim status : " + e);
 			return new ResponseEntity<>("Error occured", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@Override
+	public ResponseEntity<?> getHealthIntimationsByPolicyNo(String policyNumber) {
+		try {
+			List<HealthClaimIntimation> list = healthClaimRepo.getHealthIntimationByPolicyNo(policyNumber);
+			if(list.size() == 0) {
+				return new ResponseEntity<>("Claims not found against this policy number",HttpStatus.NOT_FOUND);
+			} else {
+				List<PolicyIntimationInfo2> policyDetails = new ArrayList<>();
+				for(HealthClaimIntimation obj:list) {
+					PolicyIntimationInfo2 policy = new PolicyIntimationInfo2();
+					policy.setClaimStatus("open");
+					policy.setIntimationAmount(obj.getClaimAmount());
+					policy.setIntimationDate(obj.getDateOfintimation());
+					policy.setIntimationNo(obj.getIntimationNo());
+					policy.setPolicyNo(obj.getPolicyNumber());
+					policy.setLob("Health");
+
+					policyDetails.add(policy);
+				}
+				return new ResponseEntity<>(policyDetails,HttpStatus.OK);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error occured in claims fetching against policy number "+policyNumber+ " : "+e);
+			return new ResponseEntity<>("Unknown Error occured", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 
 }

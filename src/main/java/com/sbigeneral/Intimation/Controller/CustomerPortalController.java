@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,15 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbigeneral.Intimation.Entity.HealthClaimIntimation;
 import com.sbigeneral.Intimation.Entity.MotorClaimIntimation;
+import com.sbigeneral.Intimation.Entity.PolicyDetails;
 import com.sbigeneral.Intimation.Service.ApiService;
 import com.sbigeneral.Intimation.Service.ClaimStatusService;
 import com.sbigeneral.Intimation.Service.HealthClaimIntimationService;
 import com.sbigeneral.Intimation.Service.MotorClaimStatusRequestMappingService;
 import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;
+import com.sbigeneral.Intimation.Service.PolicyDetailsService;
 import com.sbigeneral.Intimation.model.ClaimsWrapper;
 import com.sbigeneral.Intimation.model.FinalRequestDTO;
 import com.sbigeneral.Intimation.model.MotorClaimStatusChild1;
 import com.sbigeneral.Intimation.model.PolicyIntimationInfo;
+import com.sbigeneral.Intimation.Service.Decrypt;
+import com.sbigeneral.Intimation.Service.Encrypt;
 
 @RestController
 @RequestMapping("/CustomerPortal")
@@ -45,6 +50,13 @@ public class CustomerPortalController {
 	
 	@Autowired
 	private MotorIntimationDevApi motorIntimationService;
+	
+	@Autowired
+	private PolicyDetailsService policyDetailsService;
+
+	@Autowired
+	private HealthClaimIntimationService healthClaimIntimationService;
+	
 	
 	private static final Logger logger = LogManager.getLogger(CustomerPortalController.class);
 	
@@ -87,6 +99,30 @@ public class CustomerPortalController {
 	public ResponseEntity<?> getMotorPolicyIntimation(@RequestBody String claimNo) {
 		ResponseEntity<?> response = motorIntimationService.getMotorIntimationDetailsByClaimNo(claimNo);
 		return response;
+	}
+	
+	@PostMapping("/getPolicyClaims")
+	public ResponseEntity<?> getPolicyClaims(@RequestBody String policyNo) {
+		PolicyDetails policy = new PolicyDetails();
+		try {
+			policy = policyDetailsService.getPolicyByPolicyNo(policyNo);
+			if(policy == null) {
+				return new ResponseEntity<>("Details not found for this policy number",HttpStatus.NOT_FOUND);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("Unknown Error occured",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		String lob = policy.getLob();
+
+		if(lob.equals("Health")) {
+			ResponseEntity<?> response = healthClaimService.getHealthIntimationsByPolicyNo(policyNo);
+			return response;
+		} else {
+			ResponseEntity<?> response = motorIntimationService.getMotorIntimationsByPolicyNo(policyNo);
+			return response;
+		}
 	}
 	
 	

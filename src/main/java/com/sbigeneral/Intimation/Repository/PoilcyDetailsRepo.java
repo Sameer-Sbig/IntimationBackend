@@ -12,4 +12,7 @@ public interface PoilcyDetailsRepo extends JpaRepository<PolicyDetails, Integer>
 
 	@Query("SELECT p.agreementCode FROM PolicyDetails p WHERE p.policyNo =:policyNo")
 	public String findAgreementCodeByPolicyNo(@Param("policyNo") String policyNo);
+
+	@Query("SELECT c FROM PolicyDetails c WHERE c.policyNo =:policyNo")
+	public PolicyDetails getPolicyDetailsByPolicyNo(@Param("policyNo") String policyNo);
 }

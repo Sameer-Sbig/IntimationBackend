@@ -17,4 +17,7 @@ public interface HealthClaimIntimationRepo extends JpaRepository<HealthClaimInti
 	
 	@Query("SELECT c FROM HealthClaimIntimation c WHERE c.requestId =:requestId")
 	public List<HealthClaimIntimation> getHealthIntimationByRequestId(@Param("requestId") String requestId);
+
+	@Query("SELECT c FROM HealthClaimIntimation c WHERE c.policyNumber =:policyNumber")
+	public List<HealthClaimIntimation> getHealthIntimationByPolicyNo(@Param("policyNumber") String policyNumber);
 }

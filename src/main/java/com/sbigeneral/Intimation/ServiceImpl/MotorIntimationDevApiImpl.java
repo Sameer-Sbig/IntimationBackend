@@ -3,6 +3,7 @@ package com.sbigeneral.Intimation.ServiceImpl;
 import java.io.StringReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import com.sbigeneral.Intimation.Service.DevApiTokenService;
 import com.sbigeneral.Intimation.Service.MotorIntimationDevApi;
 import com.sbigeneral.Intimation.model.ClaimsWrapper;
 import com.sbigeneral.Intimation.model.PolicyIntimationInfo;
+import com.sbigeneral.Intimation.model.PolicyIntimationInfo2;
 
 
 @Service
@@ -204,15 +206,50 @@ public class MotorIntimationDevApiImpl implements MotorIntimationDevApi {
 			
 			if(policyInfoObj == null) {
 				return new ResponseEntity<>("Details not found against this claim No",HttpStatus.NOT_FOUND);
+			} else {
+				return new ResponseEntity<>(policyInfoObj,HttpStatus.OK);
 			}
 			
-			return new ResponseEntity<>(policyInfoObj,HttpStatus.OK);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("Error while fetching health intimation policies by claimNo : "+e);
 			return new ResponseEntity<>("Error while fetching policy intimation details",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	@Override
+	public ResponseEntity<?> getMotorIntimationsByPolicyNo(String policyNumber) {
+		try {
+			List<MotorClaimIntimation> list = motorIntimationRepo.getMotorIntimationByPolicyNo(policyNumber);
+			if(list.size() == 0) {
+				return new ResponseEntity<>("Claims not found against this policy number",HttpStatus.NOT_FOUND);
+			} else {
+				List<PolicyIntimationInfo2> policyDetails = new ArrayList<>();
+				for(MotorClaimIntimation obj :list) {
+					PolicyIntimationInfo2 policy = new PolicyIntimationInfo2();
+
+					DateTimeFormatter originalFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy-HH:mm:ss");
+					DateTimeFormatter targetFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+					LocalDateTime date = LocalDateTime.parse(obj.getTransactionTimestamp(), originalFormatter);
+					String formattedDate = date.format(targetFormatter);
+
+					policy.setClaimStatus("open");
+					policy.setIntimationAmount(Integer.parseInt(obj.getEstimatedClaimAmount()));
+					policy.setIntimationDate(formattedDate);
+					policy.setIntimationNo(obj.getClaimNo());
+					policy.setPolicyNo(obj.getPolicyNumber());
+					policy.setLob("Motor");
+
+					policyDetails.add(policy);
+				}
+				return new ResponseEntity<>(policyDetails,HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("Error occured in claims fetching against policy number "+policyNumber+ " : "+e);
+			return new ResponseEntity<>("Unknown Error occured", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 
 }

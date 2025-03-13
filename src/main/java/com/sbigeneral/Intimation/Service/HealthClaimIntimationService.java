@@ -21,6 +21,8 @@ public interface HealthClaimIntimationService {
 	
 	public List<HealthClaimIntimation> getHealthIntimationsByRequestId(String requestId);
 	
-	public ResponseEntity<?> checkHealthClaimStatus(Map<String,String> obj); 
+	public ResponseEntity<?> checkHealthClaimStatus(Map<String,String> obj);
+	
+	public ResponseEntity<?> getHealthIntimationsByPolicyNo(String policyNumber);
 	
 }

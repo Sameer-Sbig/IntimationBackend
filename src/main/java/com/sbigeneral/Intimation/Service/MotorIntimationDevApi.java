@@ -23,4 +23,6 @@ public interface MotorIntimationDevApi {
 	
 	public ResponseEntity<?> getMotorIntimationDetailsByClaimNo(String claimNo);
 
+	public ResponseEntity<?> getMotorIntimationsByPolicyNo(String policyNumber);
+
 }

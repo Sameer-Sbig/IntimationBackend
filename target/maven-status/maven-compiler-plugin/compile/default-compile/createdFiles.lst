@@ -58,6 +58,7 @@ com\sbigeneral\Intimation\Util\CachedBodyHttpServletRequest.class
 com\sbigeneral\Intimation\Intimation.class
 com\sbigeneral\Intimation\Repository\AgentRepo.class
 com\sbigeneral\Intimation\Controller\CustomerPortalController.class
+com\sbigeneral\Intimation\model\PolicyIntimationInfo2.class
 com\sbigeneral\Intimation\config\RateLimitingConfig.class
 com\sbigeneral\Intimation\Service\Encrypt.class
 com\sbigeneral\Intimation\Service\HealthClaimIntimationService.class

@@ -99,7 +99,8 @@ public class claimIntimationController {
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	
+	
 
 	@PostMapping("/checkMotorStatus")
 	public ResponseEntity<?> checkMotorStatus(@RequestBody MotorClaimStatusChild1 obj) {
@@ -122,6 +123,9 @@ public class claimIntimationController {
     public FinalRequestDTO mapRequest(@RequestBody MotorClaimStatusChild1 requestBodyDTO) {
         return requestMappingService.mapRequest(requestBodyDTO);
     }
+	
+	
+
 	
 
 

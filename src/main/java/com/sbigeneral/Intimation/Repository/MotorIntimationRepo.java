@@ -20,4 +20,7 @@ public interface MotorIntimationRepo extends JpaRepository<MotorClaimIntimation,
 	
 	@Query("SELECT c FROM MotorClaimIntimation c WHERE c.claimNo =:claimNo")
 	public MotorClaimIntimation getMotorIntimationByClaimNo(@Param("claimNo") String claimNo);
+
+	@Query("SELECT c FROM MotorClaimIntimation c WHERE c.policyNumber =:policyNumber")
+	public List<MotorClaimIntimation> getMotorIntimationByPolicyNo(@Param("policyNumber") String policyNumber);
 }
